@@ -18,8 +18,14 @@ return {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['<space>'] = 'none',
         },
       },
     },
   },
+  config = function(_, opts)
+    require('neo-tree').setup(opts)
+    vim.keymap.set('n', '<leader>e', '<cmd>Neotree focus left<CR>', { desc = 'focus file tree' })
+    vim.keymap.set('n', '<M-e>', '<cmd>Neotree toggle left<CR>', { desc = 'Toggle file tree' })
+  end,
 }

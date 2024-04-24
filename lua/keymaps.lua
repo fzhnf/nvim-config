@@ -3,7 +3,46 @@
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+
+-- Move to next/previous line when at the end of a line
+vim.opt.whichwrap:append '<>[]hl'
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- changing the default keymaps behavior to make it more intuitive
+vim.keymap.set('n', ';', ':')
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
+vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
+
+-- toggle line numbers
+vim.keymap.set('n', '<leader>n', function()
+  vim.wo.number = not vim.wo.number
+end, { desc = 'Toggle line numbers' })
+vim.keymap.set('n', '<leader>N', function()
+  vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = 'Toggle relative line numbers' })
+
+-- save the file
+vim.keymap.set('n', '<C-s>', vim.cmd.update)
+
+-- tab & window
+vim.keymap.set('n', '<C-w>h', '<cmd>wincmd h<cr>', { desc = 'Move to the window on the left' })
+vim.keymap.set('n', '<C-w>j', '<cmd>wincmd j<cr>', { desc = 'Move to the window below' })
+vim.keymap.set('n', '<C-w>k', '<cmd>wincmd k<cr>', { desc = 'Move to the window above' })
+vim.keymap.set('n', '<C-w>l', '<cmd>wincmd l<cr>', { desc = 'Move to the window on the right' })
+vim.keymap.set('n', '<C-w>q', vim.cmd.close, { desc = 'Close the current window' })
+vim.keymap.set('n', '<C-w><Tab>', vim.cmd.tabnew, { desc = 'Open a new tab' })
+vim.keymap.set('n', '<leader><Tab>', vim.cmd.tabnext, { desc = 'Move to the next tab' })
+vim.keymap.set('n', '<leader><S-Tab>', vim.cmd.tabprevious, { desc = 'Move to the previous tab' })
+
+-- buffer
+vim.keymap.set('n', '<leader>x', require('custom.utils').close_buffer, { desc = 'Close the current buffer' })
+vim.keymap.set('n', '<Tab>', '<cmd>BufferLineCycleNext<cr>', { desc = 'Move to the next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Move to the previous buffer' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -29,10 +68,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
