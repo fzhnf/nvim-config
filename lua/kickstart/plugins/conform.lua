@@ -38,6 +38,7 @@ return {
         yaml = { 'prettierd' },
         rust = { 'rustfmt' },
         cpp = { 'clang_format' },
+        bash = { 'beautysh' },
       },
     },
   },
