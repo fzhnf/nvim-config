@@ -15,6 +15,7 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
+  event = 'VeryLazy',
   version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -23,8 +24,8 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '<M-e>', ':Neotree toggle left<CR>', { desc = 'NeoTree reveal', silent = true } },
-    { '<leader>e', ':Neotree focus left<CR>', { desc = 'NeoTree toggle', silent = true } },
+    { '<leader>e', ':Neotree focus left<CR>', desc = 'NeoTree toggle', silent = true },
+    { '<M-e>', ':Neotree toggle left<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
     filesystem = {
@@ -36,6 +37,11 @@ return {
       },
     },
   },
+  -- config = function(_, opts)
+  --   require('neo-tree').setup(opts)
+  --   vim.keymap.set('n', '<leader>e', ':Neotree focus left<CR>', { desc = 'NeoTree toggle', silent = true })
+  --   vim.keymap.set('n', '<M-e>', ':Neotree toggle left<CR>', { desc = 'NeoTree reveal', silent = true })
+  -- end,
 }
 
 -- vim: ts=2 sts=2 sw=2 et

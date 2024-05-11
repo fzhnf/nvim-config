@@ -8,11 +8,15 @@
 return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
-    event = 'VimEnter',
-    branch = '0.1.x',
+    version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'jvgrootveld/telescope-zoxide',
+      {
+        'jvgrootveld/telescope-zoxide',
+        config = function()
+          require('telescope').load_extension 'zoxide'
+        end,
+      },
 
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
@@ -26,8 +30,16 @@ return {
         cond = function()
           return vim.fn.executable 'make' == 1
         end,
+        config = function()
+          require('telescope').load_extension 'fzf'
+        end,
       },
-      { 'nvim-telescope/telescope-ui-select.nvim' },
+      {
+        'nvim-telescope/telescope-ui-select.nvim',
+        config = function()
+          require('telescope').load_extension 'ui-select'
+        end,
+      },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
@@ -60,7 +72,11 @@ return {
         --
         defaults = {
           mappings = {
-            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            i = {
+              ['<c-enter>'] = 'to_fuzzy_refine',
+              ['<C-k>'] = 'move_selection_next',
+              ['<C-j>'] = 'move_selection_previous',
+            },
           },
         },
         -- pickers = {}
@@ -70,11 +86,6 @@ return {
           },
         },
       }
-
-      -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'zoxide')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
