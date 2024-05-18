@@ -1,7 +1,7 @@
 return {
   {
     'akinsho/bufferline.nvim',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     opts = {
       options = {
         mode = 'buffers',

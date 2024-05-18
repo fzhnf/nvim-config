@@ -15,14 +15,13 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  event = 'VeryLazy',
   version = '*',
+  event = 'BufEnter */',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
   },
-  cmd = 'Neotree',
   keys = {
     { '<leader>e', ':Neotree focus left<CR>', desc = 'NeoTree toggle', silent = true },
     { '<M-e>', ':Neotree toggle left<CR>', desc = 'NeoTree reveal', silent = true },
