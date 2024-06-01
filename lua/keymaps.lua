@@ -1,6 +1,5 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 
@@ -8,18 +7,18 @@ vim.opt.hlsearch = true
 vim.opt.whichwrap:append '<>[]hl'
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<CapsLock>', '<Esc>', { silent = true })
-
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- changing the default keymaps behavior to make it more intuitive
 vim.keymap.set('n', ';', ':')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('n', 'E', '$', { silent = true })
+vim.keymap.set('n', '<BS>', '<C-V><BS>', { silent = true })
 vim.keymap.set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
 vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
-vim.keymap.set('n', 'K', '5k', { silent = true })
-vim.keymap.set('n', 'J', '5j', { silent = true })
+vim.keymap.set('n', 'K', '4k', { silent = true })
+vim.keymap.set('n', 'J', '4j', { silent = true })
 
 -- toggle line numbers
 vim.keymap.set('n', '<leader>n', function()
@@ -32,18 +31,25 @@ end, { desc = 'Toggle relative line numbers' })
 -- save the file
 vim.keymap.set('n', '<C-s>', vim.cmd.update)
 
--- tab & window
+-- traverse text on insert mode
+vim.keymap.set({ 'i', 'c' }, '<C-h>', '<Left>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-l>', '<Right>', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-j>', '<C-O>gj', { silent = true })
+vim.keymap.set({ 'i', 'c' }, '<C-k>', '<C-O>gk', { silent = true })
+-- window
 vim.keymap.set('n', '<C-w>h', '<cmd>wincmd h<cr>', { desc = 'Move to the window on the left' })
 vim.keymap.set('n', '<C-w>j', '<cmd>wincmd j<cr>', { desc = 'Move to the window below' })
 vim.keymap.set('n', '<C-w>k', '<cmd>wincmd k<cr>', { desc = 'Move to the window above' })
 vim.keymap.set('n', '<C-w>l', '<cmd>wincmd l<cr>', { desc = 'Move to the window on the right' })
 vim.keymap.set('n', '<C-w>q', vim.cmd.close, { desc = 'Close the current window' })
+
+-- tab
 vim.keymap.set('n', '<C-w><Tab>', vim.cmd.tabnew, { desc = 'Open a new tab' })
 vim.keymap.set('n', '<leader><Tab>', vim.cmd.tabnext, { desc = 'Move to the next tab' })
 vim.keymap.set('n', '<leader><S-Tab>', vim.cmd.tabprevious, { desc = 'Move to the previous tab' })
 
 -- buffer
-vim.keymap.set('n', '<leader>x', require('custom.utils').close_buffer, { desc = 'Close the current buffer' })
+vim.keymap.set('n', '<leader>x', require('custom.bdelete').close_buffer, { desc = 'Close the current buffer' })
 vim.keymap.set('n', '<Tab>', '<cmd>bnext<cr>', { desc = 'Move to the next buffer' })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<cr>', { desc = 'Move to the previous buffer' })
 

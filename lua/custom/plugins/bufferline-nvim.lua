@@ -1,13 +1,13 @@
 return {
   {
     'akinsho/bufferline.nvim',
-    event = 'BufReadPre',
+    event = 'BufRead',
     opts = {
       options = {
         mode = 'buffers',
         numbers = 'none',
         diagnostics = 'nvim_lsp',
-        close_command = require('custom.utils').close_buffer,
+        close_command = require('custom.bdelete').close_buffer,
         offsets = {
           {
             filetype = 'neo-tree',

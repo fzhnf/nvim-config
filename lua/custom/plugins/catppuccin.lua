@@ -38,8 +38,7 @@ return {
   --     which_key = true,
   --   },
   -- },
-  init = function()
-    require('catppuccin').setup()
-    vim.cmd.colorscheme 'catppuccin'
+  config = function()
+    vim.cmd.colorscheme 'catppuccin-macchiato'
   end,
 }
