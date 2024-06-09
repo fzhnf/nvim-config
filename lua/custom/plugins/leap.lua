@@ -1,11 +1,15 @@
 return {
   'ggandor/leap.nvim',
   keys = {
-    { 's', mode = { 'n', 'x', 'o' }, desc = 'Leap Forward to' },
-    { 'S', mode = { 'n', 'x', 'o' }, desc = 'Leap Backward to' },
-    { 'gs', mode = { 'n', 'x', 'o' }, desc = 'Leap from Windows' },
+    { 'f', mode = { 'n', 'x', 'o' }, desc = 'Leap Forward to' },
+    { 'F', mode = { 'n', 'x', 'o' }, desc = 'Leap Backward to' },
+    { 'gf', mode = { 'n', 'x', 'o' }, desc = 'Leap from Windows' },
   },
   config = function()
-    require('leap').add_default_mappings()
+    vim.keymap.set({ 'n', 'x', 'o' }, 'f', '<Plug>(leap-forward)')
+    vim.keymap.set({ 'n', 'x', 'o' }, 'F', '<Plug>(leap-backward)')
+    vim.keymap.set({ 'n', 'x', 'o' }, 'gf', '<Plug>(leap-from-window)')
   end,
 }
+
+-- vim: ts=2 sts=2 sw=2 et

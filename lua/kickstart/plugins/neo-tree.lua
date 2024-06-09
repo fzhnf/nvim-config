@@ -15,8 +15,9 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
+  -- event = 'BufWinEnter',
+  cmd = 'Neotree',
   version = '*',
-  event = 'BufEnter */',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended

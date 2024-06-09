@@ -59,6 +59,10 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 7
 
+-- always show status line
+vim.opt.laststatus = 2
+vim.opt.hidden = true -- Allow switching buffers without saving them
+
 -- grep
 vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.grepprg = 'rg --vimgrep'

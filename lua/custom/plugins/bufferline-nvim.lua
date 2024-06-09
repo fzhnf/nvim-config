@@ -7,7 +7,7 @@ return {
         mode = 'buffers',
         numbers = 'none',
         diagnostics = 'nvim_lsp',
-        close_command = require('custom.bdelete').close_buffer,
+        -- close_command = require('custom.bdelete').close_buffer,
         offsets = {
           {
             filetype = 'neo-tree',
@@ -20,7 +20,8 @@ return {
           },
         },
         separator_style = 'thin',
-        always_show_bufferline = true,
+        show_buffer_close_icons = false,
+        show_close_icon = false,
       },
     },
   },
