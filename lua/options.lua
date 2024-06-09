@@ -60,7 +60,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 7
 
 -- always show status line
-vim.opt.laststatus = 2
+vim.opt.laststatus = 0
 vim.opt.hidden = true -- Allow switching buffers without saving them
 
 -- grep

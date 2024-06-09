@@ -9,7 +9,6 @@ return {
           load_on_setup = false,
         },
         pre_save_cmds = { 'Neotree close' },
-        post_restore_cmds = { 'Neotree filesystem show' },
       }
     end,
   },
