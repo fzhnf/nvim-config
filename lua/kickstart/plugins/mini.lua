@@ -2,7 +2,16 @@ return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.ai',
     version = '*',
-    keys = { 'an', 'in', 'al', 'il', 'g[', 'g]' },
+    keys = {
+      { 'a', mode = { 'x', 'o' } },
+      { 'i', mode = { 'x', 'o' } },
+      { 'an', mode = { 'x', 'o' } },
+      { 'in', mode = { 'x', 'o' } },
+      { 'al', mode = { 'x', 'o' } },
+      { 'il', mode = { 'x', 'o' } },
+      { 'g[', mode = { 'n', 'x', 'o' } },
+      { 'g]', mode = { 'n', 'x', 'o' } },
+    },
     opts = {
       n_lines = 500,
       mappings = {
@@ -25,7 +34,7 @@ return {
   {
     'echasnovski/mini.surround',
     version = '*',
-    keys = { 'sa', 'sd', 'sr', 'sf', 'sF', 'sh', 'sn', 'l', 'n' },
+    keys = { 'sa', 'sd', 'sr', 'sf', 'sF', 'sh', 'sn' },
     opts = {
       mappings = {
         add = 'sa', -- Add surrounding in Normal and Visual modes

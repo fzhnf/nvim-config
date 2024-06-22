@@ -32,13 +32,15 @@ return {
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { { 'prettierd', 'prettier' } },
+        typescript = { { 'prettierd', 'prettier' } },
         html = { 'prettierd' },
         css = { 'prettierd' },
         markdown = { 'prettierd' },
         yaml = { 'prettierd' },
         rust = { 'rustfmt' },
         cpp = { 'clang_format' },
-        bash = { 'beautysh' },
+        bash = { 'shfmt' },
+        fish = { 'fish_indent' },
       },
     },
   },

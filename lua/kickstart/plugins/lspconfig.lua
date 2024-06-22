@@ -159,7 +159,7 @@ return {
       local servers = {
         clangd = {},
         pyright = {},
-        -- gopls = {},
+        gopls = {},
         rust_analyzer = {},
         eslint = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -199,13 +199,14 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'beautysh', -- Used to format shell scripts
-        'mypy', -- Used to diagnose python code
         'stylua', -- Used to format Lua code
         'clang-format', -- Used to format C/C++ code
         'isort', -- Used to format Python code
         'black', -- Used to format Python code
         'prettierd', -- Used to format JavaScript, HTML, CSS, Markdown, and YAML
         'prettier', -- Used to format JavaScript, HTML, CSS, Markdown, and YAML
+        'mypy', -- Used to lint Python files
+        'vale', -- Used to lint markdown files
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

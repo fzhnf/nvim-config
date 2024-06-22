@@ -50,6 +50,19 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+
+-- Move to next/previous line when at the end of a line
+vim.opt.whichwrap:append '<>[]hl'
+
+-- Indenting
+vim.o.expandtab = true
+vim.o.shiftwidth = 2
+vim.o.smartindent = true
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
@@ -67,6 +80,8 @@ vim.opt.hidden = true -- Allow switching buffers without saving them
 vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.grepprg = 'rg --vimgrep'
 
+-- saved sessions
+vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal'
 -- disable neovim providers, without it is just fine
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0
