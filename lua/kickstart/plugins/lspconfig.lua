@@ -4,10 +4,12 @@ return {
     event = 'BufReadPre',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true, cmd = 'Mason' }, -- NOTE: Must be loaded before dependants
+      { 'williamboman/mason.nvim', config = true, cmd = { 'Mason', 'MasonLog', 'MasonInstall', 'MasonUninstall', 'MasonUpdate' } }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-
+      {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        cmd = { 'MasonToolsClean', 'MasonToolsInstall', 'MasonToolsInstallSync', 'MasonToolsUpdate', 'MasonToolsUpdateSync' },
+      },
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },

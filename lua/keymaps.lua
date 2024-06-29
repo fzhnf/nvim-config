@@ -15,8 +15,10 @@ set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
 set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
 
 -- moving faster
-set('n', 'K', '4k', { silent = true })
-set('n', 'J', '4j', { silent = true })
+set({ 'n', 'v' }, 'K', '4k', { silent = true })
+set({ 'n', 'v' }, 'J', '4j', { silent = true })
+set({ 'n', 'v' }, 'H', 'b', { silent = true })
+set({ 'n', 'v' }, 'L', 'e', { silent = true })
 
 -- toggle line numbers
 set('n', '<leader>n', function()

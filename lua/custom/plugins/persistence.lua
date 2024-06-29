@@ -1,29 +1,8 @@
 return {
-  -- {
-  --   'rmagatti/auto-session',
-  --   config = function()
-  --     require('auto-session').setup {
-  --       log_level = 'error',
-  --       auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
-  --       session_lens = {
-  --         load_on_setup = false,
-  --       },
-  --       bypass_session_save_file_types = {
-  --         '',
-  --         'blank',
-  --         'neo-tree',
-  --         'alpha',
-  --         'noice',
-  --         'notify',
-  --       },
-  --       pre_save_cmds = { 'Neotree close' },
-  --     }
-  --   end,
-  -- },
-  -- Lua
   {
     'folke/persistence.nvim',
     opts = {},
+    lazy = true,
     init = function()
       local persistenceGroup = vim.api.nvim_create_augroup('Persistence', { clear = true })
       local home = vim.fn.expand '~'
@@ -54,6 +33,27 @@ return {
       })
     end,
   },
+  -- {
+  --   'rmagatti/auto-session',
+  --   config = function()
+  --     require('auto-session').setup {
+  --       log_level = 'error',
+  --       auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
+  --       session_lens = {
+  --         load_on_setup = false,
+  --       },
+  --       bypass_session_save_file_types = {
+  --         '',
+  --         'blank',
+  --         'neo-tree',
+  --         'alpha',
+  --         'noice',
+  --         'notify',
+  --       },
+  --       pre_save_cmds = { 'Neotree close' },
+  --     }
+  --   end,
+  -- },
 }
 
 -- vim: ts=2 sts=2 sw=2 et

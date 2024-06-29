@@ -86,11 +86,7 @@ require('lazy').setup({
 
   require 'kickstart/plugins/cmp',
 
-  -- require 'kickstart/plugins/tokyonight',
-
   require 'kickstart/plugins/todo-comments',
-
-  require 'kickstart/plugins/mini',
 
   require 'kickstart/plugins/treesitter',
 
@@ -118,42 +114,24 @@ require('lazy').setup({
 }, {
   install = { colorscheme = { 'catppuccin' } },
   performance = {
-    cache = { enabled = true },
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
+      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+      ---@type string[]
+      paths = {}, -- add any custom paths here that you want to includes in the rtp
+      ---@type string[] list any plugins you want to disable here
       disabled_plugins = {
-        '2html_plugin',
-        'bugreport',
-        'compiler',
-        'ftplugin',
-        'getscript',
-        'getscriptPlugin',
-        'gzip',
-        'logipat',
-        'matchit',
-        'netrw',
-        'netrwFileHandlers',
-        'netrwPlugin',
-        'netrwSettings',
-        'optwin',
-        'rplugin',
-        'rrhelper',
-        'spellfile_plugin',
-        'synmenu',
-        'syntax',
-        'tar',
-        'tarPlugin',
-        'tohtml',
-        'tutor',
-        'vimball',
-        'vimballPlugin',
-        'zip',
-        'zipPlugin',
-        'matchparen',
-        'osc52',
-        'shada',
-        'editorconfig',
-        'man',
-        'spellfile',
+        -- "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        -- "tarPlugin",
+        -- "tohtml",
+        -- "tutor",
+        -- "zipPlugin",
       },
     },
   },

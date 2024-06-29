@@ -28,7 +28,11 @@ return {
       { '<leader>sf', '<CMD>Telescope find_files<CR>', desc = '[S]earch [F]iles' },
       { '<leader>ss', '<CMD>Telescope builtin<CR>', desc = '[S]earch [S]elect Telescope' },
       { '<leader>sw', '<CMD>Telescope grep_string<CR>', desc = '[S]earch current [W]ord' },
-      { '<leader>sg', '<CMD>Telescope live_grep<CR>', desc = '[S]earch by [G]rep' },
+      {
+        '<leader>sg',
+        '<CMD>lua require("telescope.builtin").live_grep { glob_pattern = "!node_modules/*" }<CR>',
+        desc = '[S]earch by [G]rep',
+      },
       { '<leader>sd', '<CMD>Telescope diagnostics<CR>', desc = '[S]earch [D]iagnostics' },
       { '<leader>sr', '<CMD>Telescope resume<CR>', desc = '[S]earch [R]esume' },
       { '<leader>s.', '<CMD>Telescope oldfiles<CR>', desc = '[S]earch Recent Files ("." for repeat)' },
@@ -40,7 +44,7 @@ return {
       },
       {
         '<leader>s/',
-        '<CMD>lua require("telescope.builtin").live_grep { grep_open_files = true, prompt_title = "Live Grep in Open Files" }<CR>',
+        '<CMD>lua require("telescope.builtin").live_grep { grep_open_files = true, prompt_title = "Live Grep in Open Files", glob_pattern = "!node_modules/*" }<CR>',
         desc = '[S]earch [/] in Open Files',
       },
       {
@@ -90,4 +94,5 @@ return {
   --   end,
   -- },
 }
+
 -- vim: ts=2 sts=2 sw=2 et
