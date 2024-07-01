@@ -6,10 +6,9 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint', 'vale' },
+        markdown = { 'markdownlint' },
         yaml = { 'yamllint' },
         python = { 'flake8' },
-        rust = { 'cargo' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

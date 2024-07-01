@@ -81,7 +81,7 @@ vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.grepprg = 'rg --vimgrep'
 
 -- saved sessions
-vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,terminal'
+vim.opt.sessionoptions = 'buffers,folds,help,tabpages,winsize,terminal'
 -- disable neovim providers, without it is just fine
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0
