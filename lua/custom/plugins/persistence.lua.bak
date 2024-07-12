@@ -1,0 +1,33 @@
+return {
+  {
+    'folke/persistence.nvim',
+    opts = {
+      pre_load = function()
+        require('lazy.view').view:hide()
+      end,
+    },
+    config = function()
+      local home = vim.fn.expand '~'
+      local disabled_dirs = {
+        home,
+        home .. '/Downloads',
+        '/',
+      }
+
+      local cwd = vim.fn.getcwd()
+      for _, path in pairs(disabled_dirs) do
+        if path == cwd then
+          require('persistence').stop()
+          return
+        end
+      end
+      if vim.fn.argc() == 0 and not vim.g.started_with_stdin then
+        require('persistence').load()
+      else
+        require('persistence').stop()
+      end
+    end,
+  },
+}
+
+-- vim: ts=2 sts=2 sw=2 et
