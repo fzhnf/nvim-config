@@ -1,24 +1,19 @@
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
 local set = vim.keymap.set
-
-set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+local cmd = vim.cmd
 
 -- changing the default keymaps behavior to make it more intuitive
-set('n', ';', ':')
+set('n', '<Esc>', cmd.nohlsearch, { desc = 'Clear search highlights' })
+set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 set('v', '<', '<gv')
 set('v', '>', '>gv')
-set('n', 'E', '$', { silent = true })
 set('n', '<BS>', '<C-V><BS>', { silent = true })
-set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
-set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
+set('n', 'k', 'v:count ? "k" : "gk"', { expr = true, silent = true })
+set('n', 'j', 'v:count ? "j" : "gj"', { expr = true, silent = true })
 
 -- moving faster
 set({ 'n', 'v' }, 'K', '4k', { silent = true })
 set({ 'n', 'v' }, 'J', '4j', { silent = true })
-set({ 'n', 'v' }, 'H', 'b', { silent = true })
-set({ 'n', 'v' }, 'L', 'e', { silent = true })
 
 -- toggle line numbers
 set('n', '<leader>n', function()
@@ -29,65 +24,42 @@ set('n', '<leader>N', function()
 end, { desc = 'Toggle relative line numbers' })
 
 -- save the file
-set('n', '<C-s>', vim.cmd.update)
+set('n', '<C-s>', cmd.write, { desc = 'Save the current file', silent = true })
 
 -- traverse text on insert mode
-set({ 'i', 'c' }, '<C-h>', '<Left>', { silent = true })
-set({ 'i', 'c' }, '<C-l>', '<Right>', { silent = true })
-set({ 'i', 'c' }, '<C-j>', '<C-O>gj', { silent = true })
-set({ 'i', 'c' }, '<C-k>', '<C-O>gk', { silent = true })
--- window
-set('n', '<C-w>h', '<cmd>wincmd h<cr>', { desc = 'Move to the window on the left' })
-set('n', '<C-w>j', '<cmd>wincmd j<cr>', { desc = 'Move to the window below' })
-set('n', '<C-w>k', '<cmd>wincmd k<cr>', { desc = 'Move to the window above' })
-set('n', '<C-w>l', '<cmd>wincmd l<cr>', { desc = 'Move to the window on the right' })
-set('n', '<C-w>q', vim.cmd.close, { desc = 'Close the current window' })
+set('i', '<M-h>', '<Left>')
+set('i', '<M-l>', '<Right>')
+set('i', '<M-j>', function()
+  return vim.v.count and cmd 'normal j' or cmd 'normal gj'
+end)
+set('i', '<M-k>', function()
+  return vim.v.count and cmd 'normal k' or cmd 'normal gk'
+end)
 
 -- tab
-set('n', '<C-w><Tab>', vim.cmd.tabnew, { desc = 'Open a new tab' })
-set('n', '<leader><Tab>', vim.cmd.tabnext, { desc = 'Move to the next tab' })
-set('n', '<leader><S-Tab>', vim.cmd.tabprevious, { desc = 'Move to the previous tab' })
+set('n', '<C-w>t', cmd.tabnew, { desc = 'Open new empty tab' })
+set('n', '<C-w><tab>', cmd.tabnext, { desc = 'Move to the next tab' })
+set('n', '<C-w><S-tab>', cmd.tabprevious, { desc = 'Move to the previous tab' })
+
+-- window
+set('n', '<M-Up>', '<CMD>resize -2<CR>', { desc = 'Resize split up' })
+set('n', '<M-Down>', '<CMD>resize +2<CR>', { desc = 'Resize split down' })
+set('n', '<M-Left>', '<CMD>vertical resize -2<CR>', { desc = 'Resize split left' })
+set('n', '<M-Right>', '<CMD>vertical resize +2<CR>', { desc = 'Resize split right' })
 
 -- buffer
-set('n', '<leader>x', require('custom.bdelete').close_buffer, { desc = 'Close the current buffer' })
-set('n', '<Tab>', '<cmd>bnext<cr>', { desc = 'Move to the next buffer' })
-set('n', '<S-Tab>', '<cmd>bprevious<cr>', { desc = 'Move to the previous buffer' })
+set('n', '<Tab>', cmd.bnext, { desc = 'Move to the next tab' })
+set('n', '<S-Tab>', cmd.bprevious, { desc = 'Move to the previous tab' })
+set('n', '<leader>x', '<CMD>Bdelete<CR>', { desc = 'Close the current buffer' })
 
--- Diagnostic keymaps
+-- Diagnostic
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-set('n', '<leader>q', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+set('n', '<leader>q', vim.diagnostic.open_float, { desc = 'Show diagnostic [q]uickfix on cursor line' })
 set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
--- set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -95,5 +67,35 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- [[ User Commands ]]
+-- Open Alpha when there is no buffer and confirm to delete buffer when modified
+local function bdelete()
+  if #vim.fn.getbufinfo { buflisted = 1 } > 1 then
+    cmd 'bnext|bdelete!#'
+    return
+  end
+  cmd 'Alpha|bdelete!#'
+end
+
+vim.api.nvim_create_user_command('Bdelete', function()
+  -- Check if the file type is in excluded file types, if so, don't delete
+  if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha' }, vim.bo.filetype) then
+    return
+  end
+
+  if not vim.bo.modified then
+    bdelete()
+    return
+  end
+
+  local choice = vim.fn.confirm('Save changes to ' .. vim.fn.bufname(vim.fn.bufnr '%') .. ' ?', '&Yes\n&No\n&Cancel')
+  if choice == 3 then
+    return
+  elseif choice == 1 then
+    cmd 'silent write'
+  end
+  bdelete()
+end, {})
 
 -- vim: ts=2 sts=2 sw=2 et
