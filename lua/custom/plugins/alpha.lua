@@ -1,15 +1,12 @@
 return {
   {
     'goolord/alpha-nvim',
-    dependencies = {
-      'DaikyXendo/nvim-material-icon',
-    },
-
+    priority = 100,
     config = function()
-      local alpha = require 'alpha'
+      -- disable showmode, showtabline, show ruler
       local startify = require 'alpha.themes.startify'
-      startify.nvim_web_devicons.enabled = vim.g.have_nerd_font
-      startify.nvim_web_devicons.highlight = vim.g.have_nerd_font
+      startify.nvim_web_devicons.enabled = false
+      startify.nvim_web_devicons.highlight = false
       startify.section.header.val = {
         '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡀⠀⣠⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⢰⡀⢀⡆⠀⠀⠀⢀⡀⠀⠀⠀⠀⣆',
         '⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⣀⣠⠄⠸⡷⠄⢹⡧⠀⢀⡀⠀⠀⠍⠛⠀⣀⣤⠤⠖⢸⡷⠀⣿⠆⠀⢀⠀⢳⠀⠀⠀⠀⣿⠆⠀⠀⠀⠀⠀⠀⣀',
@@ -26,11 +23,18 @@ return {
       -- center the buttons
       startify.section.top_buttons.val = {
         startify.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
-      }
-      startify.section.bottom_buttons.val = {
         startify.button('q', '󰅚  Quit NVIM', ':qa<CR>'),
       }
-      alpha.setup(startify.opts)
+      startify.section.bottom_buttons.val = {}
+
+      startify.config.opts.noautocmd = true
+
+      require('alpha').setup(startify.config)
+      -- vim.api.nvim_create_autocmd('VimLeavePre', {
+      --   callback = function()
+      --     require('alpha').close()
+      --   end,
+      -- })
     end,
   },
 }
