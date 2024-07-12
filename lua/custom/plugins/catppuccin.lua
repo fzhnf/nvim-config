@@ -2,27 +2,33 @@ return {
   'catppuccin/nvim',
   name = 'catppuccin',
   opts = {
+    transparent_background = false,
+    default_integrations = false,
     integrations = {
       alpha = true,
       cmp = true,
       gitsigns = true,
       indent_blankline = {
         enabled = true,
-        scope_color = 'lavender', -- catppuccin color (eg. `lavender`) Default: text
-        colored_indent_levels = false,
+        scope_color = 'lavender',
       },
+      aerial = true,
+      flash = true,
+      ufo = true,
       mason = true,
-      mini = {
-        enabled = true,
-        indentscope_color = 'lavender',
-      },
       neotree = true,
-      telescope = true,
+      telescope = {
+        enabled = true,
+        style = 'nvchad',
+      },
       treesitter = true,
+      treesitter_context = true,
       which_key = true,
+      fidget = true,
     },
   },
-  config = function()
+  config = function(_, opts)
+    require('catppuccin').setup(opts)
     vim.cmd.colorscheme 'catppuccin-macchiato'
   end,
 }
