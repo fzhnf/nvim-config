@@ -1,8 +1,7 @@
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
-    event = 'BufReadPre',
-    version = '3.5.4',
+    event = 'BufRead',
     main = 'ibl',
     opts = {},
   },

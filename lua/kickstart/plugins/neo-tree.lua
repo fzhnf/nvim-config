@@ -1,33 +1,21 @@
 -- Neo-tree is a Neovim plugin to browse the file system
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 
--- function ToggleNeotree()
---   -- Check if Neotree is the active buffer
---   local current_buf = vim.fn.bufname '%'
---   if current_buf == 'neo-tree' then
---     -- If Neotree is focused, switch focus to the previous buffer
---     vim.cmd 'silent wincmd p'
---   else
---     -- If Neotree is not focused, toggle Neotree
---     vim.cmd 'silent Neotree focus left'
---   end
--- end
-
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  -- event = 'BufWinEnter',
   cmd = 'Neotree',
   branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'DaikyXendo/nvim-material-icon', -- not strictly required, but recommended
+    'DaikyXendo/nvim-material-icon',
     'MunifTanjim/nui.nvim',
   },
   keys = {
-    { '<leader>e', ':Neotree focus left<CR>', desc = 'NeoTree toggle', silent = true },
-    { '<M-e>', ':Neotree toggle left<CR>', desc = 'NeoTree reveal', silent = true },
+    { '<leader>e', '<CMD>Neotree focus left<CR>', desc = 'NeoTree toggle', silent = true },
+    { '<leader>o', '<CMD>Neotree toggle left<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
+    close_if_last_window = false,
     filesystem = {
       window = {
         mappings = {
@@ -37,11 +25,6 @@ return {
       },
     },
   },
-  -- config = function(_, opts)
-  --   require('neo-tree').setup(opts)
-  --   vim.keymap.set('n', '<leader>e', ':Neotree focus left<CR>', { desc = 'NeoTree toggle', silent = true })
-  --   vim.keymap.set('n', '<M-e>', ':Neotree toggle left<CR>', { desc = 'NeoTree reveal', silent = true })
-  -- end,
 }
 
 -- vim: ts=2 sts=2 sw=2 et
