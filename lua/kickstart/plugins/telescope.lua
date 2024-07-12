@@ -1,14 +1,11 @@
--- NOTE: Plugins can specify dependencies.
---
--- The dependencies are proper plugin specifications as well - anything
--- you do for a plugin at the top level, you can do for a dependency.
---
--- Use the `dependencies` key to specify the dependencies of a particular plugin
-
 return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     version = false, -- telescope did only one release, so use HEAD for now
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      lazy = true,
+    },
     cmd = 'Telescope',
     opts = {
       defaults = {
@@ -53,9 +50,6 @@ return {
         desc = '[S]earch [N]eovim files',
       },
     },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
   },
   {
     'jvgrootveld/telescope-zoxide',
@@ -64,35 +58,6 @@ return {
       require('telescope').load_extension 'zoxide'
     end,
   },
-  -- { -- If encountering errors, see telescope-fzf-native README for installation instructions
-  --   'nvim-telescope/telescope-fzf-native.nvim',
-  --
-  --   -- `build` is used to run some command when the plugin is installed/updated.
-  --   -- This is only run then, not every time Neovim starts up.
-  --   build = 'make',
-  --
-  --   -- `cond` is a condition used to determine whether this plugin should be
-  --   -- installed and loaded.
-  --   cond = function()
-  --     return vim.fn.executable 'make' == 1
-  --   end,
-  --   config = function()
-  --     require('telescope').load_extension 'fzf'
-  --   end,
-  -- },
-  -- {
-  --   'nvim-telescope/telescope-ui-select.nvim',
-  --   config = function()
-  --     require('telescope').load_extension 'ui-select'
-  --     require('telescope').setup {
-  --       extensions = {
-  --         ['ui-select'] = {
-  --           require('telescope.themes').get_dropdown(),
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
 }
 
 -- vim: ts=2 sts=2 sw=2 et
