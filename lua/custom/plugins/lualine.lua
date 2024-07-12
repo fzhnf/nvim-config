@@ -2,21 +2,14 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     event = 'BufRead',
-    dependencies = { 'DaikyXendo/nvim-material-icon' },
+    dependencies = { 'DaikyXendo/nvim-material-icon', 'nvim-neo-tree/neo-tree.nvim' },
     opts = {
       options = {
-        icons_enabled = true,
+        icons_enabled = vim.g.have_nerd_font,
         theme = 'catppuccin',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-        disabled_filetypes = {
-          statusline = { 'neo-tree', 'alpha' },
-
-          winbar = {},
-        },
-        ignore_focus = {},
-        always_divide_middle = true,
-        globalstatus = false,
+        component_separators = '',
+        section_separators = '',
+        always_divide_middle = false,
         refresh = {
           statusline = 1000,
           tabline = 1000,
@@ -24,25 +17,42 @@ return {
         },
       },
       sections = {
-        lualine_a = { 'mode' },
+        lualine_a = {
+          {
+            'mode',
+            fmt = function(mode)
+              return vim.b['visual_multi'] and mode .. ' - MULTI' or mode
+            end,
+          },
+        },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { 'encoding', { 'filetype', icon_only = true } },
+        lualine_x = { { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } } },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },
       inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
         lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { 'branch' },
-        lualine_y = {},
-        lualine_z = {},
+        lualine_z = { 'location' },
       },
-      tabline = {},
-      winbar = {},
-      inactive_winbar = {},
-      extensions = {},
+      tabline = {
+        -- TODO: change from nvim-tree to neo-tree
+
+        -- lualine_a = {
+        --   {
+        --     function()
+        --       -- return string.rep(' ', vim.api.nvim_win_get_width(require('nvim-tree.view').get_winnr()) - 1)
+        --       return string.rep(' ', vim.api.nvim_win_get_width(require('neo-tree.sources.common.preview').winid) - 1)
+        --     end,
+        --     -- cond = require('nvim-tree.view').is_visible,
+        --     conf = require('neo-tree.sources.common.preview').is_active(),
+        --     color = 'NvimTreeNormal',
+        --   },
+        -- },
+        lualine_b = { { 'buffers', mode = 2 } },
+        lualine_z = { 'tabs' },
+      },
+      extensions = { 'neo-tree', 'toggleterm' },
     },
   },
 }
