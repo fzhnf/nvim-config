@@ -6,9 +6,7 @@ return {
   cmd = 'Neotree',
   branch = 'v3.x',
   dependencies = {
-    'nvim-lua/plenary.nvim',
-    'DaikyXendo/nvim-material-icon',
-    'MunifTanjim/nui.nvim',
+    { 'MunifTanjim/nui.nvim', lazy = true },
   },
   keys = {
     { '<leader>e', '<CMD>Neotree focus left<CR>', desc = 'NeoTree toggle', silent = true },

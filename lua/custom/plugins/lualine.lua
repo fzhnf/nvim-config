@@ -2,7 +2,6 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     event = 'BufRead',
-    dependencies = { 'DaikyXendo/nvim-material-icon', 'nvim-neo-tree/neo-tree.nvim' },
     opts = {
       options = {
         icons_enabled = vim.g.have_nerd_font,
@@ -26,7 +25,7 @@ return {
           },
         },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { { 'filename', path = 1 } },
+        lualine_c = { { 'filename', path = 1 }, 'aerial' },
         lualine_x = { { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } } },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
@@ -35,24 +34,24 @@ return {
         lualine_c = { { 'filename', path = 1 } },
         lualine_z = { 'location' },
       },
-      tabline = {
-        -- TODO: change from nvim-tree to neo-tree
-
-        -- lualine_a = {
-        --   {
-        --     function()
-        --       -- return string.rep(' ', vim.api.nvim_win_get_width(require('nvim-tree.view').get_winnr()) - 1)
-        --       return string.rep(' ', vim.api.nvim_win_get_width(require('neo-tree.sources.common.preview').winid) - 1)
-        --     end,
-        --     -- cond = require('nvim-tree.view').is_visible,
-        --     conf = require('neo-tree.sources.common.preview').is_active(),
-        --     color = 'NvimTreeNormal',
-        --   },
-        -- },
-        lualine_b = { { 'buffers', mode = 2 } },
-        lualine_z = { 'tabs' },
-      },
-      extensions = { 'neo-tree', 'toggleterm' },
+      --   tabline = {
+      --     -- TODO: change from nvim-tree to neo-tree
+      --
+      --     -- lualine_a = {
+      --     --   {
+      --     --     function()
+      --     --       -- return string.rep(' ', vim.api.nvim_win_get_width(require('nvim-tree.view').get_winnr()) - 1)
+      --     --       return string.rep(' ', vim.api.nvim_win_get_width(require('neo-tree.sources.common.preview').winid) - 1)
+      --     --     end,
+      --     --     -- cond = require('nvim-tree.view').is_visible,
+      --     --     conf = require('neo-tree.sources.common.preview').is_active(),
+      --     --     color = 'NvimTreeNormal',
+      --     --   },
+      --     -- },
+      --     lualine_b = { { 'buffers', mode = 2 } },
+      --     lualine_z = { 'tabs' },
+      --   },
+      extensions = { 'neo-tree', 'toggleterm', 'lazy' },
     },
   },
 }

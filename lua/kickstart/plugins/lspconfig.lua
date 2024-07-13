@@ -99,6 +99,7 @@ return {
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             map('<leader>lh', function()
+              ---@diagnostic disable-next-line: missing-parameter
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, 'Toggle Inlay [H]ints')
           end
@@ -120,7 +121,6 @@ return {
         gopls = {},
         rust_analyzer = {},
         eslint = {},
-        tsserver = {},
 
         lua_ls = {
           settings = {

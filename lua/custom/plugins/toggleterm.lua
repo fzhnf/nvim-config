@@ -11,7 +11,6 @@ return {
       {
         '<leader>gl',
         function()
-          require('toggleterm').setup()
           local Terminal = require('toggleterm.terminal').Terminal
           local lazygit = Terminal:new { cmd = 'lazygit', hidden = true, direction = 'float', close_on_exit = true }
 

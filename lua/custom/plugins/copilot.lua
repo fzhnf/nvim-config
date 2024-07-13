@@ -1,7 +1,6 @@
 return {
   {
     'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
     event = 'InsertEnter',
     opts = {
       copilot_node_command = vim.fn.expand '$HOME' .. '/.nvm/versions/node/v20.15.1/bin/node',

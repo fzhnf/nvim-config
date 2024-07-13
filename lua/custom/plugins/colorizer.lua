@@ -1,4 +1,5 @@
 return {
-  'NvChad/nvim-colorizer.lua',
+  'norcalli/nvim-colorizer.lua',
   event = 'BufRead',
+  opts = {},
 }

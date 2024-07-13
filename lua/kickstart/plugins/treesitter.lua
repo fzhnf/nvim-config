@@ -124,7 +124,7 @@ return {
         },
       },
     },
-    dependencies = { { 'nvim-treesitter/nvim-treesitter-textobjects', lazy = true }, { 'nvim-treesitter/nvim-treesitter-context', lazy = true } },
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', 'nvim-treesitter/nvim-treesitter-context' },
     config = function(_, opts)
       -- Prefer git instead of curl in order to improve connectivity in some environments
       require('nvim-treesitter.install').prefer_git = true

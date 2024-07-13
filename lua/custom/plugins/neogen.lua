@@ -23,7 +23,7 @@ return {
             require('neogen').generate { type = input }
           end)
         end,
-        mode = {'n','v'},
+        mode = { 'n', 'v' },
         desc = '[G]enerate annotation',
         silent = true,
       },

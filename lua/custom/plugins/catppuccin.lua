@@ -1,10 +1,17 @@
 return {
   'catppuccin/nvim',
   name = 'catppuccin',
+  lazy = false,
+  priority = 102,
   opts = {
+    background = {
+      light = 'latte',
+      dark = 'macchiato',
+    },
     transparent_background = false,
     default_integrations = false,
     integrations = {
+      bufferline = true,
       alpha = true,
       cmp = true,
       gitsigns = true,

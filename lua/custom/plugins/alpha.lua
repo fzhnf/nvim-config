@@ -28,7 +28,8 @@ return {
       startify.section.bottom_buttons.val = {}
 
       startify.config.opts.noautocmd = true
-
+      vim.opt.ruler = false
+      vim.opt.laststatus = 0
       require('alpha').setup(startify.config)
       -- vim.api.nvim_create_autocmd('VimLeavePre', {
       --   callback = function()

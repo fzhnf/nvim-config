@@ -2,10 +2,6 @@ return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     version = false, -- telescope did only one release, so use HEAD for now
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      lazy = true,
-    },
     cmd = 'Telescope',
     opts = {
       defaults = {
