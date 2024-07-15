@@ -2,6 +2,15 @@ return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VeryLazy',
+    keys = {
+      {
+        '<leader>?',
+        function()
+          require('which-key').show { global = false }
+        end,
+        desc = 'Buffer Local Keymaps (which-key)',
+      },
+    },
     config = function()
       require('which-key').add {
         { '<leader>l', group = '[L]SP' },
@@ -12,6 +21,8 @@ return {
           { '<leader>t', group = '[T]reesitter]' },
           { '<leader>g', group = '[G]it' },
         },
+        { '<leader>lg', group = '[G]oto' },
+        { '<leader>gt', group = '[T]oggle ' },
       }
     end,
   },

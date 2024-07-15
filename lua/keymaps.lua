@@ -24,7 +24,7 @@ set('n', '<leader>N', function()
 end, { desc = 'Toggle relative line numbers' })
 
 -- save the file
-set('n', '<C-s>', cmd.write, { desc = 'Save the current file', silent = true })
+set('n', '<C-s>', cmd.update, { desc = 'Save the current file', silent = true })
 
 -- traverse text on insert mode
 set('i', '<M-h>', '<Left>')
@@ -37,7 +37,7 @@ set('i', '<M-k>', function()
 end)
 
 -- tab
-set('n', '<C-w>t', cmd.tabnew, { desc = 'Open new empty tab' })
+set('n', '<C-w>t', cmd.tabnew, { desc = 'Open empty new tab' })
 set('n', '<C-w><tab>', cmd.tabnext, { desc = 'Move to the next tab' })
 set('n', '<C-w><S-tab>', cmd.tabprevious, { desc = 'Move to the previous tab' })
 
@@ -48,9 +48,7 @@ set('n', '<M-Left>', '<CMD>vertical resize -2<CR>', { desc = 'Resize split left'
 set('n', '<M-Right>', '<CMD>vertical resize +2<CR>', { desc = 'Resize split right' })
 
 -- buffer
-set('n', '<Tab>', cmd.bnext, { desc = 'Move to the next tab' })
-set('n', '<S-Tab>', cmd.bprevious, { desc = 'Move to the previous tab' })
-set('n', '<leader>x', '<CMD>Bdelete<CR>', { desc = 'Close the current buffer' })
+set('n', '<leader>x', '<CMD>Bdelete<CR>', { desc = 'delete current buffer' })
 
 -- Diagnostic
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -80,7 +78,8 @@ end
 
 vim.api.nvim_create_user_command('Bdelete', function()
   -- Check if the file type is in excluded file types, if so, don't delete
-  if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha' }, vim.bo.filetype) then
+  -- if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha' }, vim.bo.filetype) then
+  if vim.bo.filetype == 'alpha' then
     return
   end
 

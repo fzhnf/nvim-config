@@ -1,25 +1,7 @@
 return {
   {
     'folke/flash.nvim',
-    opts = {
-      modes = {
-        -- a regular search with `/` or `?`
-        search = {
-          enabled = true,
-        },
-        -- `f`, `F`, `t`, `T`, `;` and `,` motions
-        char = {
-          enabled = false,
-        },
-      },
-    },
     keys = {
-      {
-        '/',
-      },
-      {
-        '?',
-      },
       {
         's',
         mode = { 'n', 'x', 'o' },
@@ -59,6 +41,18 @@ return {
           require('flash').toggle()
         end,
         desc = 'Toggle Flash Search',
+      },
+    },
+    opts = {
+      modes = {
+        -- a regular search with `/` or `?`
+        search = {
+          enabled = true,
+        },
+        -- `f`, `F`, `t`, `T`, `;` and `,` motions
+        char = {
+          enabled = false,
+        },
       },
     },
   },

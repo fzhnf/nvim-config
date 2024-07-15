@@ -15,7 +15,7 @@ return {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     event = 'BufRead',
-    build = ':TSUpdate',
+    build = '<CMD>TSUpdate',
     opts = {
       ensure_installed = ts_parsers,
       auto_install = true,

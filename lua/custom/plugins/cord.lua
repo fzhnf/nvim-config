@@ -2,7 +2,7 @@ return {
   {
     'vyfor/cord.nvim',
     build = './build',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     opts = {
       usercmds = false, -- Enable user commands
       timer = {

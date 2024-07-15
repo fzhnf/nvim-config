@@ -1,16 +1,14 @@
 return {
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
+    keys = {
+      { 'gc' },
+    },
     opts = {
       enable_autocmd = false,
     },
-    keys = {
-      { 'gc' },
-      { 'gcc' },
-      { 'cgc' },
-      { 'gcu' },
-    },
-    config = function()
+    config = function(_, opts)
+      require('ts_context_commentstring').setup(opts)
       local get_option = vim.filetype.get_option
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.filetype.get_option = function(filetype, option)

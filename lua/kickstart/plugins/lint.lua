@@ -2,12 +2,12 @@ return {
 
   { -- Linting
     'mfussenegger/nvim-lint',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = 'BufReadPre',
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
-        yaml = { 'yamllint' },
+        markdown = nil,
+        yaml = 'yamllint',
         python = { 'flake8' },
       }
 

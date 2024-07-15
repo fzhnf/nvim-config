@@ -1,12 +1,14 @@
 return {
   'akinsho/bufferline.nvim',
-  event = 'BufRead',
   version = '*',
+  event = 'BufReadPost',
   keys = {
-    { '<leader><tab>', '<cmd>bufferlinemovenext<cr>', desc = 'move to the next tab', mode = 'n' },
-    { '<leader><s-tab>', '<cmd>bufferlinemoveprev<cr>', desc = 'move to the previous tab', mode = 'n' },
-    { '<leader>be', '<cmd>bufferlinesortbyextension', desc = 'sort buffers by extension', mode = 'n' },
-    { '<leader>bd', '<cmd>bufferlinesortbydirectory', desc = 'sort buffers by directory', mode = 'n' },
+    { '<tab>', '<CMD>BufferLineCycleNext<CR>', desc = 'move to the next tab' },
+    { '<S-tab>', '<CMD>BufferLineCyclePrev<CR>', desc = 'move to the previous tab' },
+    { ']b', '<CMD>BufferLineMoveNext<CR>', desc = 'move to the next tab' },
+    { '[b', '<CMD>BufferLineMovePrev<CR>', desc = 'move to the previous tab' },
+    { '<leader>be', '<CMD>BufferLineSortByExtension<CR>', desc = 'sort buffers by extension' },
+    { '<leader>bd', '<CMD>BufferLineSortByDirectory<CR>', desc = 'sort buffers by directory' },
   },
   config = function()
     require('bufferline').setup {
@@ -18,7 +20,7 @@ return {
         },
 
         mode = 'buffers',
-        separator_style = 'slope',
+        separator_style = { '', '' },
         diagnostics = 'nvim_lsp',
         offsets = {
           {

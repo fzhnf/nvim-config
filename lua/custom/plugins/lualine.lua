@@ -1,7 +1,7 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
-    event = 'BufRead',
+    event = 'BufReadPost',
     opts = {
       options = {
         icons_enabled = vim.g.have_nerd_font,
