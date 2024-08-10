@@ -21,13 +21,6 @@ return {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { 'prettierd', 'prettier' },
-        typescript = { 'prettierd', 'prettier' },
-        html = { 'prettierd', 'prettier' },
-        css = { 'prettierd', 'prettier' },
-        markdown = { 'prettierd', 'prettier' },
-        yaml = { 'prettierd', 'prettier' },
-        json = { 'prettierd', 'prettier' },
         python = {
           -- To fix auto-fixable lint errors.
           'ruff_fix',
@@ -36,6 +29,11 @@ return {
           -- To organize the imports.
           'ruff_organize_imports',
         },
+        javascript = { 'biome' },
+        typescript = { 'biome' },
+        html = { 'biome' },
+        css = { 'biome' },
+        json = { 'biome' },
         rust = { 'rustfmt' },
         cpp = { 'clang_format' },
         bash = { 'shfmt' },
