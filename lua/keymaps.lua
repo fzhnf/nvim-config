@@ -38,7 +38,7 @@ end)
 
 -- tab
 set('n', '<C-w>t', cmd.tabnew, { desc = 'Open empty new tab' })
-set('n', '<C-w><tab>', cmd.tabnext, { desc = 'Move to the next tab' })
+set('n', '<C-w><Tab>', cmd.tabnext, { desc = 'Move to the next tab' })
 set('n', '<C-w><S-tab>', cmd.tabprevious, { desc = 'Move to the previous tab' })
 
 -- window
@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Open Alpha when there is no buffer and confirm to delete buffer when modified
 local function bdelete()
   if #vim.fn.getbufinfo { buflisted = 1 } > 1 then
-    cmd 'bnext|bdelete!#'
+    cmd 'bprevious|bdelete!#'
     return
   end
   cmd 'Alpha|bdelete!#'
@@ -78,8 +78,8 @@ end
 
 vim.api.nvim_create_user_command('Bdelete', function()
   -- Check if the file type is in excluded file types, if so, don't delete
-  -- if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha' }, vim.bo.filetype) then
-  if vim.bo.filetype == 'alpha' then
+  if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha', 'aerial' }, vim.bo.filetype) then
+    -- if vim.bo.filetype == 'alpha' then
     return
   end
 
