@@ -11,6 +11,15 @@ return {
     { '<leader>e', '<CMD>Neotree reveal<CR>', desc = 'reveal neo-tree', silent = true },
     { '<leader>o', '<CMD>Neotree toggle left<CR>', desc = 'toggle neo-tree', silent = true },
   },
+  opts = {
+    filesystem = {
+      window = {
+        mappings = {
+          ['\\'] = 'close_window',
+        },
+      },
+    },
+  },
 }
 
 -- vim: ts=2 sts=2 sw=2 et

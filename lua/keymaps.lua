@@ -3,7 +3,7 @@ local set = vim.keymap.set
 local cmd = vim.cmd
 
 -- changing the default keymaps behavior to make it more intuitive
-set('n', '<Esc>', cmd.nohlsearch, { desc = 'Clear search highlights' })
+set('n', '<Esc>', cmd.nohlsearch)
 set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 set('v', '<', '<gv')
 set('v', '>', '>gv')

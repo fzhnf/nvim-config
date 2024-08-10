@@ -1,15 +1,4 @@
-local ts_parsers = {
-  'bash',
-  'c',
-  'diff',
-  'html',
-  'lua',
-  'rust',
-  'luadoc',
-  'markdown',
-  'vim',
-  'vimdoc',
-}
+local ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
 
 return {
   { -- Highlight, edit, and navigate code
@@ -17,7 +6,8 @@ return {
     event = 'BufRead',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = ts_parsers,
+      ensure_installed = ensure_installed,
+      -- Autoinstall languages that are not installed
       auto_install = true,
 
       highlight = {
@@ -38,6 +28,7 @@ return {
         select = {
           enable = true,
 
+<<<<<<< HEAD
           -- Automatically jump forward to textobj, similar to targets.vim
           lookahead = true,
 
@@ -128,6 +119,8 @@ return {
     config = function(_, opts)
       -- Prefer git instead of curl in order to improve connectivity in some environments
       require('nvim-treesitter.install').prefer_git = true
+=======
+>>>>>>> 198460c421a29ea0d45280756ee462f51f71b60f
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 

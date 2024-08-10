@@ -1,7 +1,7 @@
 return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    event = 'VeryLazy',
+    event = 'VimEnter',
     keys = {
       {
         '<leader>?',
@@ -24,12 +24,13 @@ return {
         { '<leader>l', group = '[L]SP' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>b', group = '[B]uffer' },
+        { '<leader>lg', group = '[G]oto' },
         {
           mode = { 'n', 'v' },
           { '<leader>t', group = '[T]reesitter]' },
           { '<leader>g', group = '[G]it' },
         },
-        { '<leader>lg', group = '[G]oto' },
+
         { '<leader>gt', group = '[T]oggle ' },
       }
     end,
