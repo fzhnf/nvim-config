@@ -160,6 +160,9 @@ return {
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
+            if vim.tbl_contains({ 'tsserver', 'rust_analyzer' }, server_name) then
+              return
+            end
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
