@@ -116,12 +116,23 @@ return {
       -- Enable the following language servers
       -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
       local servers = {
-        clangd = {},
-        pyright = {},
-        gopls = {},
+        pyright = {
+          settings = {
+            pyright = {
+              disableOrganizeImports = true, -- Using Ruff
+            },
+            python = {
+              analysis = {
+                ignore = { '*' }, -- Using Ruff
+                typeCheckingMode = 'off', -- Using mypy
+              },
+            },
+          },
+        },
+        ruff = {},
         rust_analyzer = {},
-        eslint = {},
-
+        tsserver = {},
+        biome = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -141,9 +152,7 @@ return {
         'stylua', -- Used to format Lua code
         'clang-format', -- Used to format C/C++ code
         'isort', -- Used to format Python code
-        'black', -- Used to format Python code
-        'prettierd', -- Used to format JavaScript, HTML, CSS, Markdown, and YAML
-        'prettier', -- Used to format JavaScript, HTML, CSS, Markdown, and YAML
+        'ruff', -- Used to format Python code
         'mypy', -- Used to lint Python files
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
