@@ -21,7 +21,6 @@ return {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
         javascript = { 'prettierd', 'prettier' },
         typescript = { 'prettierd', 'prettier' },
         html = { 'prettierd', 'prettier' },
@@ -29,6 +28,14 @@ return {
         markdown = { 'prettierd', 'prettier' },
         yaml = { 'prettierd', 'prettier' },
         json = { 'prettierd', 'prettier' },
+        python = {
+          -- To fix auto-fixable lint errors.
+          'ruff_fix',
+          -- To run the Ruff formatter.
+          'ruff_format',
+          -- To organize the imports.
+          'ruff_organize_imports',
+        },
         rust = { 'rustfmt' },
         cpp = { 'clang_format' },
         bash = { 'shfmt' },
