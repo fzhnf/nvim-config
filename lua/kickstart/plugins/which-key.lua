@@ -11,7 +11,15 @@ return {
         desc = 'Buffer Local Keymaps (which-key)',
       },
     },
-    config = function()
+    opts = {
+      plugins = {
+        spelling = {
+          enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+        },
+      },
+    },
+    config = function(_, opts)
+      require('which-key').setup(opts)
       require('which-key').add {
         { '<leader>l', group = '[L]SP' },
         { '<leader>s', group = '[S]earch' },
