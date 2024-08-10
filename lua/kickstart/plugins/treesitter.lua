@@ -28,7 +28,6 @@ return {
         select = {
           enable = true,
 
-<<<<<<< HEAD
           -- Automatically jump forward to textobj, similar to targets.vim
           lookahead = true,
 
@@ -119,8 +118,6 @@ return {
     config = function(_, opts)
       -- Prefer git instead of curl in order to improve connectivity in some environments
       require('nvim-treesitter.install').prefer_git = true
-=======
->>>>>>> 198460c421a29ea0d45280756ee462f51f71b60f
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 
