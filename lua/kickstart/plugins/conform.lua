@@ -1,7 +1,7 @@
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
-    event = 'BufWritePre',
+    event = 'BufWrite',
     keys = {
       {
         '<leader>lf',
@@ -31,6 +31,7 @@ return {
         },
         javascript = { 'biome' },
         typescript = { 'biome' },
+        astro = { 'biome' },
         html = { 'biome' },
         css = { 'biome' },
         json = { 'biome' },

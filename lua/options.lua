@@ -8,6 +8,9 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- mouse scroll
+vim.opt.mousescroll = 'ver:2,hor:4' -- add this to fix wezterm wayland scroll speed problems
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -69,10 +72,5 @@ vim.opt.laststatus = 0
 
 -- change sessionopts
 vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,winsize'
-
--- disable neovim providers, without it is just fine
-for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
-  vim.g['loaded_' .. provider .. '_provider'] = 0
-end
 
 -- vim: ts=2 sts=2 sw=2 et

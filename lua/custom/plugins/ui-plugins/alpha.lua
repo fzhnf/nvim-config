@@ -3,9 +3,7 @@ return {
     'goolord/alpha-nvim',
     priority = 100,
     config = function()
-      local startify = require 'alpha.themes.startify'
-      startify.nvim_web_devicons.enabled = false
-      startify.nvim_web_devicons.highlight = false
+      local startify = require 'custom.startify-no-icons'
       startify.section.header.val = {
         '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡀⠀⣠⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⢰⡀⢀⡆⠀⠀⠀⢀⡀⠀⠀⠀⠀⣆',
         '⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⣀⣠⠄⠸⡷⠄⢹⡧⠀⢀⡀⠀⠀⠍⠛⠀⣀⣤⠤⠖⢸⡷⠀⣿⠆⠀⢀⠀⢳⠀⠀⠀⠀⣿⠆⠀⠀⠀⠀⠀⠀⣀',
@@ -20,13 +18,17 @@ return {
       }
 
       -- center the buttons
-      startify.section.top_buttons.val = {
-        startify.button('e', '  New file', '<CMD>ene <BAR> startinsert <CR>'),
-        startify.button('q', '󰅚  Quit NVIM', '<CMD>qa<CR>'),
-      }
-      startify.section.bottom_buttons.val = {}
+      startify.section.top_buttons.val = { startify.button('e', '  New file', '<CMD>ene <BAR> startinsert <CR>') }
 
-      startify.config.opts.noautocmd = true
+      startify.section.bottom_buttons.val = { startify.button('q', '󰅚  Quit NVIM', '<CMD>qa<CR>') }
+
+      startify.config.opts = {
+        margin = 5,
+        noautocmd = true,
+        keymap = {
+          press_queue = nil,
+        },
+      }
       require('alpha').setup(startify.config)
     end,
   },

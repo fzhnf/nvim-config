@@ -1,5 +1,5 @@
 return {
   'norcalli/nvim-colorizer.lua',
-  event = 'BufReadPost',
+  event = 'BufRead',
   opts = {},
 }

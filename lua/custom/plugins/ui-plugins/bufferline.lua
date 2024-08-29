@@ -1,7 +1,12 @@
 return {
   'akinsho/bufferline.nvim',
   version = '*',
-  event = 'BufReadPost',
+  event = 'BufRead',
+  dependencies = {
+    'tiagovla/scope.nvim',
+    opts = {},
+    lazy = true,
+  },
   keys = {
     { '<Tab>', '<CMD>BufferLineCycleNext<CR>', desc = 'move to the next tab' },
     { '<S-tab>', '<CMD>BufferLineCyclePrev<CR>', desc = 'move to the previous tab' },

@@ -161,9 +161,8 @@ return {
       require('mason').setup()
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'beautysh', -- Used to format shell scripts
         'stylua', -- Used to format Lua code
-        'clang-format', -- Used to format C/C++ code
+        -- 'clang-format', -- Used to format C/C++ code
         'isort', -- Used to format Python code
         'ruff', -- Used to format Python code
         'mypy', -- Used to lint Python files

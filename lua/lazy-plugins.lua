@@ -2,7 +2,11 @@
 require('lazy').setup {
   spec = {
     { import = 'kickstart.plugins' },
-    { import = 'custom.plugins' },
+    { import = 'custom.plugins.ft-plugins' },
+    { import = 'custom.plugins.ts-plugins' },
+    { import = 'custom.plugins.ui-plugins' },
+    { import = 'custom.plugins.util-plugins' },
+    { import = 'custom.plugins.vim-plugins' },
   },
 
   install = { colorscheme = { 'catppuccin' } },

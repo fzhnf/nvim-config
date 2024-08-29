@@ -24,7 +24,15 @@ set('n', '<leader>N', function()
 end, { desc = 'Toggle relative line numbers' })
 
 -- save the file
-set('n', '<C-s>', cmd.update, { desc = 'Save the current file', silent = true })
+set('n', '<C-s>', function()
+  if vim.fn.expand '%' == '' then
+    vim.ui.input({ prompt = 'Save as: ' }, function(input)
+      vim.cmd.write { input }
+    end)
+  else
+    vim.cmd.update()
+  end
+end, { desc = 'Save the current file', silent = true })
 
 -- traverse text on insert mode
 set('i', '<M-h>', '<Left>')

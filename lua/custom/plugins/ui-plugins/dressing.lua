@@ -1,7 +1,7 @@
 return {
   {
     'stevearc/dressing.nvim',
-    event = 'BufReadPost',
+    event = 'BufRead',
   },
 }
 
