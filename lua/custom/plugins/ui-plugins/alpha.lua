@@ -1,9 +1,9 @@
 return {
   {
     'goolord/alpha-nvim',
-    priority = 100,
+    priority = 1000,
     config = function()
-      local startify = require 'custom.startify-no-icons'
+      local startify = require 'alpha.themes.startify'
       startify.section.header.val = {
         '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡀⠀⣠⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⢰⡀⢀⡆⠀⠀⠀⢀⡀⠀⠀⠀⠀⣆',
         '⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⣀⣠⠄⠸⡷⠄⢹⡧⠀⢀⡀⠀⠀⠍⠛⠀⣀⣤⠤⠖⢸⡷⠀⣿⠆⠀⢀⠀⢳⠀⠀⠀⠀⣿⠆⠀⠀⠀⠀⠀⠀⣀',
@@ -19,7 +19,6 @@ return {
 
       -- center the buttons
       startify.section.top_buttons.val = { startify.button('e', '  New file', '<CMD>ene <BAR> startinsert <CR>') }
-
       startify.section.bottom_buttons.val = { startify.button('q', '󰅚  Quit NVIM', '<CMD>qa<CR>') }
 
       startify.config.opts = {

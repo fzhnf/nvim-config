@@ -1,20 +1,18 @@
 local ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
 
 return {
-  { -- Highlight, edit, and navigate code
+  {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufRead',
     build = ':TSUpdate',
     opts = {
       ensure_installed = ensure_installed,
-      -- Autoinstall languages that are not installed
       auto_install = true,
 
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {

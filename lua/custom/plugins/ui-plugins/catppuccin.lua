@@ -1,7 +1,7 @@
 return {
   'catppuccin/nvim',
   name = 'catppuccin',
-  priority = 102,
+  priority = 1002,
   opts = {
     background = {
       light = 'latte',

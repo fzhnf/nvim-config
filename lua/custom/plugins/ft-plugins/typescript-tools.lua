@@ -1,21 +1,25 @@
 return {
   'pmizio/typescript-tools.nvim',
-  dependencies = { 'neovim/nvim-lspconfig', lazy = true },
-  ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'astro' },
-  opts = {
-    settings = {
-      separate_diagnostic_server = false,
-    },
-  },
-  config = function(_, opts)
-    require('typescript-tools').setup(opts)
-    vim.api.nvim_create_autocmd('BufWrite', {
-      group = vim.api.nvim_create_augroup('TSToolsFormat', {}),
-      pattern = '*.ts,*.tsx,*.jsx,*.js',
-      callback = function()
-        vim.cmd 'TSToolsAddMissingImports sync'
-        vim.cmd 'TSToolsOrganizeImports sync'
-      end,
-    })
+  ft = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+  config = function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    require('typescript-tools').setup {
+      filetypes = {
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'vue', -- This needed to be added.
+      },
+      settings = {
+        capabilities = capabilities,
+        tsserver_plugins = {
+          '@vue/typescript-plugin',
+        },
+        single_file_support = false,
+      },
+    }
   end,
 }

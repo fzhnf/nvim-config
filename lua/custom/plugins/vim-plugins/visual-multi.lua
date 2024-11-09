@@ -2,7 +2,7 @@ return {
   {
     'mg979/vim-visual-multi',
     keys = {
-      { '<C-n>', desc = 'Find Word', silent = true },
+      { '<C-n>', mode = { 'n', 'v' }, desc = 'Find Word', silent = true },
       { '<C-Down>', desc = 'Add Cursors Down' },
       { '<C-Up>', desc = 'Add Cursors Up' },
       { '<S-Right>', desc = 'Select Right' },

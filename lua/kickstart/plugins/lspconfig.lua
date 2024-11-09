@@ -72,7 +72,7 @@ return {
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
-          map('<leader>lk', vim.lsp.buf.hover, 'Hover Documentation')
+          map('<leader>k', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -128,7 +128,11 @@ return {
 
       -- Enable the following language servers
       -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
+      -- local mason_registry = require 'mason-registry'
+      -- local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+
       local servers = {
+        clangd = {},
         pyright = {
           settings = {
             pyright = {
@@ -144,8 +148,21 @@ return {
         },
         ruff = {},
         rust_analyzer = {},
-        tsserver = {},
+        -- tsserver = {
+        --   init_options = {
+        --     plugins = {
+        --       {
+        --         name = '@vue/typescript-plugin',
+        --         location = vue_language_server_path,
+        --         languages = { 'vue' },
+        --       },
+        --     },
+        --   },
+        --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+        -- },
+        volar = {},
         biome = {},
+        tailwindcss = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -168,11 +185,10 @@ return {
         'mypy', -- Used to lint Python files
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            if vim.tbl_contains({ 'tsserver', 'rust_analyzer' }, server_name) then
+            if vim.tbl_contains({ 'rust_analyzer' }, server_name) then
               return
             end
             local server = servers[server_name] or {}

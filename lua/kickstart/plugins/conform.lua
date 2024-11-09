@@ -15,25 +15,24 @@ return {
     opts = {
       notify_on_error = true,
       format_on_save = {
-        -- I recommend these options. See :help conform.format for details.
         lsp_format = 'fallback',
         timeout_ms = 500,
       },
       formatters_by_ft = {
+        c = { 'clang_format' },
         lua = { 'stylua' },
         python = {
-          -- To fix auto-fixable lint errors.
           'ruff_fix',
-          -- To run the Ruff formatter.
           'ruff_format',
-          -- To organize the imports.
           'ruff_organize_imports',
         },
         javascript = { 'biome' },
+        javascriptreact = { 'biome' },
         typescript = { 'biome' },
+        typescriptreact = { 'biome' },
         astro = { 'biome' },
-        html = { 'biome' },
-        css = { 'biome' },
+        html = { 'prettierd' },
+        css = { 'prettierd' },
         json = { 'biome' },
         rust = { 'rustfmt' },
         -- cpp = 'clang_format',

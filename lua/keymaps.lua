@@ -50,10 +50,10 @@ set('n', '<C-w><Tab>', cmd.tabnext, { desc = 'Move to the next tab' })
 set('n', '<C-w><S-tab>', cmd.tabprevious, { desc = 'Move to the previous tab' })
 
 -- window
-set('n', '<M-Up>', '<CMD>resize -2<CR>', { desc = 'Resize split up' })
-set('n', '<M-Down>', '<CMD>resize +2<CR>', { desc = 'Resize split down' })
-set('n', '<M-Left>', '<CMD>vertical resize -2<CR>', { desc = 'Resize split left' })
-set('n', '<M-Right>', '<CMD>vertical resize +2<CR>', { desc = 'Resize split right' })
+set({ 'n', 't' }, '<M-Up>', '<CMD>resize -2<CR>', { desc = 'Resize split up' })
+set({ 'n', 't' }, '<M-Down>', '<CMD>resize +2<CR>', { desc = 'Resize split down' })
+set({ 'n', 't' }, '<M-Left>', '<CMD>vertical resize -2<CR>', { desc = 'Resize split left' })
+set({ 'n', 't' }, '<M-Right>', '<CMD>vertical resize +2<CR>', { desc = 'Resize split right' })
 
 -- buffer
 set('n', '<leader>x', '<CMD>Bdelete<CR>', { desc = 'delete current buffer' })
@@ -87,7 +87,6 @@ end
 vim.api.nvim_create_user_command('Bdelete', function()
   -- Check if the file type is in excluded file types, if so, don't delete
   if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha', 'aerial' }, vim.bo.filetype) then
-    -- if vim.bo.filetype == 'alpha' then
     return
   end
 

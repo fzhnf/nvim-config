@@ -16,6 +16,9 @@ return {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['G'] = function(state)
+            state.filtered_items.visible = false
+          end,
         },
       },
     },

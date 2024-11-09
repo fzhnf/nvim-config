@@ -39,7 +39,7 @@ return {
       --     color_square_width = 2,
       --   },
       -- },
-      { 'Exafunction/codeium.nvim', opts = {} },
+      { 'zbirenbaum/copilot-cmp', opts = {} },
       'saadparwaiz1/cmp_luasnip',
       'onsails/lspkind.nvim',
 
@@ -122,11 +122,11 @@ return {
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'buffer' },
-          { name = 'codeium' },
+          { name = 'nvim_lsp', group_index = 1 },
+          { name = 'luasnip', group_index = 1 },
+          { name = 'path', group_index = 1 },
+          { name = 'buffer', group_index = 1 },
+          { name = 'copilot', group_index = 2 },
         },
         formatting = {
           fields = {
@@ -137,6 +137,7 @@ return {
           expandable_indicator = true,
           format = require('lspkind').cmp_format {
             mode = 'symbol_text',
+            symbol_map = { Copilot = '' },
             -- before = require('tailwindcss-colorizer-cmp').formatter,
           },
         },
