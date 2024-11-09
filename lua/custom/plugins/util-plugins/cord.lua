@@ -11,7 +11,7 @@ return {
         reset_on_change = false, -- Reset start timestamp on presence change
       },
       editor = {
-        tooltip = "(◕ ̮ ◕)っ❃🌸I'm💮so🪷stupid🌹🌺", -- Text to display when hovering over the editor's image
+        tooltip = "I'm an awkward fellow after all", -- Text to display when hovering over the editor's image
       },
       display = {
         show_time = true, -- Display start timestamp
