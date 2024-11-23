@@ -3,7 +3,7 @@ local ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdo
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead',
+    event = 'BufReadPost',
     build = ':TSUpdate',
     opts = {
       ensure_installed = ensure_installed,

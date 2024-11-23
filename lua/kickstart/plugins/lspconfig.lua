@@ -16,7 +16,7 @@ return {
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
-    event = 'BufRead',
+    event = 'BufReadPost',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true, cmd = { 'Mason', 'MasonLog', 'MasonInstall', 'MasonUninstall', 'MasonUpdate' } }, -- NOTE: Must be loaded before dependants
@@ -148,6 +148,7 @@ return {
         },
         ruff = {},
         rust_analyzer = {},
+        volar = {},
         -- tsserver = {
         --   init_options = {
         --     plugins = {
@@ -160,7 +161,23 @@ return {
         --   },
         --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         -- },
-        volar = {},
+        sqls = {
+          on_attach = function(client, bufnr)
+            require('sqls').on_attach(client, bufnr) -- require sqls.nvim
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
+          settings = {
+            sqls = {
+              connections = {
+                {
+                  driver = 'postgresql',
+                  dataSourceName = 'host=127.0.0.1 port=5432 user=domba password=woof dbname=hono-bookstoredb sslmode=disable',
+                },
+              },
+            },
+          },
+        },
         biome = {},
         tailwindcss = {},
         lua_ls = {
@@ -179,7 +196,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        -- 'clang-format', -- Used to format C/C++ code
+        'clang-format', -- Used to format C/C++ code
         'isort', -- Used to format Python code
         'ruff', -- Used to format Python code
         'mypy', -- Used to lint Python files
@@ -188,7 +205,12 @@ return {
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            if vim.tbl_contains({ 'rust_analyzer' }, server_name) then
+            if vim.tbl_contains({ 'rust_analyzer', 'ts_ls' }, server_name) then
+              return
+            end
+            if vim.tbl_contains({ 'sqls' }, server_name) then
+              local server = servers[server_name] or {}
+              require('lspconfig')[server_name].setup(server)
               return
             end
             local server = servers[server_name] or {}

@@ -20,6 +20,7 @@ return {
       },
       formatters_by_ft = {
         c = { 'clang_format' },
+        cpp = { 'clang_format' },
         lua = { 'stylua' },
         python = {
           'ruff_fix',
@@ -35,9 +36,7 @@ return {
         css = { 'prettierd' },
         json = { 'biome' },
         rust = { 'rustfmt' },
-        -- cpp = 'clang_format',
-        -- bash = 'shfmt',
-        -- fish = 'fish_indent',
+        sql = { 'sqlfluff' },
       },
     },
   },
