@@ -3,9 +3,11 @@ return {
   version = '*',
   event = 'BufRead',
   dependencies = {
-    'tiagovla/scope.nvim',
-    opts = {},
-    lazy = true,
+    {
+      'tiagovla/scope.nvim',
+      event = 'BufReadPre',
+      opts = {},
+    },
   },
   keys = {
     { '<Tab>', '<CMD>BufferLineCycleNext<CR>', desc = 'move to the next tab' },
@@ -15,28 +17,23 @@ return {
     { '<leader>be', '<CMD>BufferLineSortByExtension<CR>', desc = 'sort buffers by extension' },
     { '<leader>bd', '<CMD>BufferLineSortByDirectory<CR>', desc = 'sort buffers by directory' },
   },
-  config = function()
-    require('bufferline').setup {
-      highlights = require('catppuccin.groups.integrations.bufferline').get(),
-
-      options = {
-        close_command = 'Bdelete',
-        indicator = {
-          style = 'none',
-        },
-
-        mode = 'buffers',
-        separator_style = { '', '' },
-        diagnostics = 'nvim_lsp',
-        offsets = {
-          {
-            filetype = 'neo-tree',
-            text = '  Explorer',
-            text_align = 'center',
-            highlight = 'Directory',
-          },
+  opts = {
+    options = {
+      close_command = 'Bdelete',
+      indicator = {
+        style = 'none',
+      },
+      mode = 'buffers',
+      separator_style = { '', '' },
+      diagnostics = 'nvim_lsp',
+      offsets = {
+        {
+          filetype = 'neo-tree',
+          text = '  neo-tree',
+          text_align = 'center',
+          highlight = 'Directory',
         },
       },
-    }
-  end,
+    },
+  },
 }

@@ -133,6 +133,7 @@ return {
 
       local servers = {
         clangd = {},
+        jdtls = {},
         pyright = {
           settings = {
             pyright = {
@@ -149,6 +150,9 @@ return {
         ruff = {},
         rust_analyzer = {},
         volar = {},
+        denols = {
+          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
+        },
         -- tsserver = {
         --   init_options = {
         --     plugins = {

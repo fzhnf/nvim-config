@@ -1,3 +1,8 @@
-return { 'stevearc/dressing.nvim' }
-
--- vim: ts=2 sts=2 sw=2 et
+return {
+  'stevearc/dressing.nvim',
+  event = 'BufReadPost',
+  lazy = true,
+  opts = {
+    select = { backend = { 'telescope', 'fzf_lua', 'fzf', 'builtin', 'nui' } },
+  },
+}

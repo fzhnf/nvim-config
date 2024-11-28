@@ -13,11 +13,12 @@ return {
         function()
           vim.ui.select({ 'any', 'func', 'class', 'type', 'file' }, {
             prompt = 'select annotation type:',
-            format_item = function(item)
-              return 'generate ' .. item
+            telescope = require('telescope.themes').get_cursor(),
+            format_item = function(type)
+              return 'generate ' .. type
             end,
-          }, function(input)
-            require('neogen').generate { type = input }
+          }, function(selected)
+            require('neogen').generate { type = selected }
           end)
         end,
         mode = { 'n', 'v' },

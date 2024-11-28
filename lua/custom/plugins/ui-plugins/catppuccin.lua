@@ -20,7 +20,6 @@ return {
       },
       aerial = true,
       flash = true,
-      ufo = true,
       mason = true,
       neotree = true,
       telescope = {

@@ -5,14 +5,11 @@ return {
     opts = {
       options = {
         icons_enabled = vim.g.have_nerd_font,
-        theme = 'catppuccin',
-        component_separators = '',
-        section_separators = '',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
         always_divide_middle = false,
         refresh = {
-          statusline = 10000,
-          tabline = 10000,
-          winbar = 10000,
+          statusline = 500,
         },
       },
       sections = {
