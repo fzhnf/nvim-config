@@ -16,7 +16,6 @@ return {
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
-    event = 'BufReadPost',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true, cmd = { 'Mason', 'MasonLog', 'MasonInstall', 'MasonUninstall', 'MasonUpdate' } }, -- NOTE: Must be loaded before dependants
@@ -35,8 +34,14 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          -- NOTE: Remember that Lua is a real programming language, and as such it is possible
+          -- to define small helper and utility functions so you don't have to repeat yourself.
+          --
+          -- In this case, we create a function that lets us more easily define mappings specific
+          -- for LSP related items. It sets the mode, buffer and description for us each time.
+          local map = function(keys, func, desc, mode)
+            mode = mode or 'n'
+            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
           -- Jump to the definition of the word under your cursor.
@@ -68,11 +73,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>lc', vim.lsp.buf.code_action, '[C]ode action')
-
-          -- Opens a popup that displays documentation about the word under your cursor
-          --  See `:help K` for why this keymap.
-          map('<leader>k', vim.lsp.buf.hover, 'Hover Documentation')
+          map('<leader>lc', vim.lsp.buf.code_action, '[C]ode Action',{ 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -119,6 +120,16 @@ return {
         end,
       })
 
+      -- Change diagnostic symbols in the sign column (gutter)
+      -- if vim.g.have_nerd_font then
+      --   local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
+      --   local diagnostic_signs = {}
+      --   for type, icon in pairs(signs) do
+      --     diagnostic_signs[vim.diagnostic.severity[type]] = icon
+      --   end
+      --   vim.diagnostic.config { signs = { text = diagnostic_signs } }
+      -- end
+
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
@@ -128,8 +139,14 @@ return {
 
       -- Enable the following language servers
       -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
-      -- local mason_registry = require 'mason-registry'
-      -- local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      --
+      --  Add any additional override configuration in the following tables. Available keys are:
+      --  - cmd (table): Override the default command used to start the server
+      --  - filetypes (table): Override the default list of associated filetypes for the server
+      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+      --  - settings (table): Override the default settings passed when initializing the server.
+      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
       local servers = {
         clangd = {},
@@ -153,18 +170,6 @@ return {
         denols = {
           root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
         },
-        -- tsserver = {
-        --   init_options = {
-        --     plugins = {
-        --       {
-        --         name = '@vue/typescript-plugin',
-        --         location = vue_language_server_path,
-        --         languages = { 'vue' },
-        --       },
-        --     },
-        --   },
-        --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-        -- },
         sqls = {
           on_attach = function(client, bufnr)
             require('sqls').on_attach(client, bufnr) -- require sqls.nvim
@@ -212,15 +217,10 @@ return {
             if vim.tbl_contains({ 'rust_analyzer', 'ts_ls' }, server_name) then
               return
             end
-            if vim.tbl_contains({ 'sqls' }, server_name) then
-              local server = servers[server_name] or {}
-              require('lspconfig')[server_name].setup(server)
-              return
-            end
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
+            -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,

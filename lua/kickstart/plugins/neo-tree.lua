@@ -3,13 +3,15 @@
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  lazy = true,
+  version = '*',
   dependencies = {
-    { 'MunifTanjim/nui.nvim', lazy = true },
+    'nvim-lua/plenary.nvim',
+    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+    'MunifTanjim/nui.nvim',
   },
+  cmd = 'Neotree',
   keys = {
-    { '<leader>e', '<CMD>Neotree reveal<CR>', desc = 'reveal neo-tree', silent = true },
-    { '<leader>o', '<CMD>Neotree toggle left<CR>', desc = 'toggle neo-tree', silent = true },
+    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
     filesystem = {
