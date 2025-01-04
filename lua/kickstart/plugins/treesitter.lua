@@ -3,9 +3,11 @@ local ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdo
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', 'nvim-treesitter/nvim-treesitter-context' },
     opts = {
       ensure_installed = ensure_installed,
       auto_install = true,
@@ -83,7 +85,6 @@ return {
             --
             -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
             [']o'] = '@loop.*',
-            -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
             --
             -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
             -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
@@ -114,11 +115,9 @@ return {
         },
       },
     },
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', 'nvim-treesitter/nvim-treesitter-context' },
     config = function(_, opts)
       -- Prefer git instead of curl in order to improve connectivity in some environments
       require('nvim-treesitter.install').prefer_git = true
-      ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
@@ -130,10 +129,6 @@ return {
       set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move_next)
       set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_previous)
 
-      -- vim way: ; goes to the direction you were moving.
-      -- set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-      -- set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-
       -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
       set({ 'n', 'x', 'o' }, 'f', ts_repeat_move.builtin_f_expr, { expr = true })
       set({ 'n', 'x', 'o' }, 'F', ts_repeat_move.builtin_F_expr, { expr = true })
@@ -143,7 +138,7 @@ return {
       -- example: make gitsigns.nvim movement repeatable with ; and , keys.
 
       -- make sure forward function comes first
-      local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+      local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.nav_hunk 'next', gs.nav_hunk 'last')
       -- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
 
       set({ 'n', 'x', 'o' }, ']h', next_hunk_repeat)

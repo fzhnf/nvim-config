@@ -10,8 +10,9 @@ vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+
 -- mouse scroll
-vim.opt.mousescroll = 'ver:2,hor:4' -- add this to fix wezterm wayland scroll speed problems
+vim.opt.mousescroll = 'ver:2,hor:4' -- maintain scroll speed, since it is too fast in wayland
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.

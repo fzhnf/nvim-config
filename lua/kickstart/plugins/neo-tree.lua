@@ -11,6 +11,7 @@ return {
   },
   cmd = 'Neotree',
   keys = {
+    { '<leader>e', ':Neotree reveal<CR>', desc = 'reveal neo-tree', silent = true },
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
@@ -18,6 +19,7 @@ return {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          [' e'] = 'close_window',
           ['G'] = function(state)
             state.filtered_items.visible = false
           end,

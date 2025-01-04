@@ -16,6 +16,8 @@ return {
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    event = { 'BufReadPost', 'BufNewFile' },
+    cmd = { 'LspInfo', 'LspInstall', 'LspUninstall' },
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true, cmd = { 'Mason', 'MasonLog', 'MasonInstall', 'MasonUninstall', 'MasonUpdate' } }, -- NOTE: Must be loaded before dependants
@@ -73,7 +75,11 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>lc', vim.lsp.buf.code_action, '[C]ode Action',{ 'n', 'x' })
+          map('<leader>lc', vim.lsp.buf.code_action, '[C]ode Action', { 'n', 'x' })
+
+          -- Opens a popup that displays documentation about the word under your cursor
+          --  See `:help K` for why this keymap.
+          map('<leader>k', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -214,7 +220,7 @@ return {
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            if vim.tbl_contains({ 'rust_analyzer', 'ts_ls' }, server_name) then
+            if vim.tbl_contains({ 'rust_analyzer', 'ts_ls','hls' }, server_name) then
               return
             end
             local server = servers[server_name] or {}

@@ -1,7 +1,6 @@
 return {
   {
     'rmagatti/auto-session',
-    priority = 1001,
     opts = {
       auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
       session_lens = {
