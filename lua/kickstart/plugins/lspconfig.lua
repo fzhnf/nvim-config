@@ -218,6 +218,8 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
       require('mason-lspconfig').setup {
+        ensure_installed = {},
+        automatic_installation = true,
         handlers = {
           function(server_name)
             if vim.tbl_contains({ 'rust_analyzer', 'ts_ls','hls' }, server_name) then
