@@ -21,10 +21,10 @@ return {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 
-        'williamboman/mason.nvim',        
-        cmd = { 'Mason', 'MasonLog', 'MasonInstall', 'MasonUninstall', 'MasonUpdate' }, 
-        opts = {} 
+      {
+        'williamboman/mason.nvim',
+        cmd = { 'Mason', 'MasonLog', 'MasonInstall', 'MasonUninstall', 'MasonUpdate' },
+        opts = {},
       },
       'williamboman/mason-lspconfig.nvim',
       {
@@ -160,9 +160,8 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
       local servers = {
-        clangd = {},
-        ts_ls = {},
-        jdtls = {},
+        -- python
+        ruff = {},
         pyright = {
           settings = {
             pyright = {
@@ -176,31 +175,34 @@ return {
             },
           },
         },
-        ruff = {},
-        rust_analyzer = {},
-        volar = {},
-        denols = {
-          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
-        },
-        -- sqls = {
-        --   on_attach = function(client, bufnr)
-        --     require('sqls').on_attach(client, bufnr) -- require sqls.nvim
-        --     client.server_capabilities.documentFormattingProvider = false
-        --     client.server_capabilities.documentRangeFormattingProvider = false
-        --   end,
-        --   settings = {
-        --     sqls = {
-        --       connections = {
-        --         {
-        --           driver = 'postgresql',
-        --           dataSourceName = 'host=127.0.0.1 port=5432 user=domba password=woof dbname=hono-bookstoredb sslmode=disable',
-        --         },
-        --       },
-        --     },
-        --   },
-        -- },
+
+        -- web
+        ts_ls = {},
         biome = {},
+        volar = {},
         tailwindcss = {},
+        intelephense = {},
+
+        -- go
+        gopls = {
+          settings = {
+            gopls = {
+              completeUnimported = true,
+              usePlaceholders = true,
+              analyses = {
+                unusedparams = true,
+              },
+            },
+          },
+        },
+
+        -- rust
+        rust_analyzer = {},
+
+        -- java
+        jdtls = {},
+
+        -- lua
         lua_ls = {
           settings = {
             Lua = {
@@ -254,4 +256,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

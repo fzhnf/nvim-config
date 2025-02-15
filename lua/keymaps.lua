@@ -1,68 +1,119 @@
 -- [[ Basic Keymaps ]]
-local set = vim.keymap.set
-local cmd = vim.cmd
 
--- changing the default keymaps behavior to make it more intuitive
-set('n', '<Esc>', cmd.nohlsearch)
-set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-set('v', '<', '<gv')
-set('v', '>', '>gv')
-set('n', '<BS>', '<C-V><BS>', { silent = true })
-set('n', 'k', 'v:count ? "k" : "gk"', { expr = true, silent = true })
-set('n', 'j', 'v:count ? "j" : "gj"', { expr = true, silent = true })
+-- Table of keybindings
+local defaults = { noremap = true, silent = true }
 
--- moving faster
-set({ 'n', 'v' }, 'K', '4k', { silent = true })
-set({ 'n', 'v' }, 'J', '4j', { silent = true })
+local keymaps = {
+  { 'n', '<Esc>', vim.cmd.nohlsearch },
+  { { 'n', 'v' }, '<Space>', '<Nop>' },
+  { 'v', '<', '<gv' },
+  { 'v', '>', '>gv' },
+  { 'n', '<BS>', '<C-V><BS>' },
+  { 'n', 'k', 'v:count ? "k" : "gk"', { expr = true } },
+  { 'n', 'j', 'v:count ? "j" : "gj"', { expr = true } },
+  { { 'n', 'v' }, 'K', '4k' },
+  { { 'n', 'v' }, 'J', '4j' },
 
--- toggle line numbers
-set('n', '<leader>n', function()
-  vim.wo.number = not vim.wo.number
-end, { desc = 'Toggle line numbers' })
-set('n', '<leader>N', function()
-  vim.wo.relativenumber = not vim.wo.relativenumber
-end, { desc = 'Toggle relative line numbers' })
+  -- Toggle line numbers
+  {
+    'n',
+    '<leader>n',
+    function()
+      vim.wo.number = not vim.wo.number
+    end,
+    { desc = 'Toggle line numbers' },
+  },
+  {
+    'n',
+    '<leader>N',
+    function()
+      vim.wo.relativenumber = not vim.wo.relativenumber
+    end,
+    { desc = 'Toggle relative line numbers' },
+  },
 
--- save the file
-set('n', '<C-s>', function()
-  if vim.fn.expand '%' == '' then
-    vim.ui.input({ prompt = 'Save as: ' }, function(input)
-      vim.cmd.write { input }
-    end)
-  else
-    vim.cmd.update()
-  end
-end, { desc = 'Save the current file', silent = true })
+  -- Save file
+  {
+    'n',
+    '<C-s>',
+    function()
+      if vim.fn.filewritable(vim.fn.expand '%') ~= 1 then
+        return
+      end
+      if vim.fn.expand '%' ~= '' then
+        vim.cmd.update()
+        return
+      end
+      vim.ui.input({ prompt = 'Save as: ' }, function(input)
+        if input then
+          vim.cmd.write(input)
+        end
+      end)
+    end,
+    { desc = 'Save the current file' },
+  },
 
--- traverse text on insert mode
-set('i', '<M-h>', '<Left>')
-set('i', '<M-l>', '<Right>')
-set('i', '<M-j>', function()
-  return vim.v.count and cmd 'normal j' or cmd 'normal gj'
-end)
-set('i', '<M-k>', function()
-  return vim.v.count and cmd 'normal k' or cmd 'normal gk'
-end)
+  -- Traverse in insert mode
+  { 'i', '<M-h>', '<Left>' },
+  { 'i', '<M-l>', '<Right>' },
+  {
+    'i',
+    '<M-j>',
+    function()
+      return vim.v.count and vim.cmd 'normal j' or vim.cmd 'normal gj'
+    end,
+  },
+  {
+    'i',
+    '<M-k>',
+    function()
+      return vim.v.count and vim.cmd 'normal k' or vim.cmd 'normal gk'
+    end,
+  },
 
--- tab
-set('n', '<C-w>t', cmd.tabnew, { desc = 'Open empty new tab' })
-set('n', '<C-w><Tab>', cmd.tabnext, { desc = 'Move to the next tab' })
-set('n', '<C-w><S-tab>', cmd.tabprevious, { desc = 'Move to the previous tab' })
+  -- Tabs
+  { 'n', '<C-w>t', vim.cmd.tabnew, { desc = 'Open new tab' } },
+  { 'n', '<C-w><Tab>', vim.cmd.tabnext, { desc = 'Next tab' } },
+  { 'n', '<C-w><S-tab>', vim.cmd.tabprevious, { desc = 'Previous tab' } },
 
--- window
-set({ 'n', 't' }, '<M-Up>', '<CMD>resize -2<CR>', { desc = 'Resize split up' })
-set({ 'n', 't' }, '<M-Down>', '<CMD>resize +2<CR>', { desc = 'Resize split down' })
-set({ 'n', 't' }, '<M-Left>', '<CMD>vertical resize -2<CR>', { desc = 'Resize split left' })
-set({ 'n', 't' }, '<M-Right>', '<CMD>vertical resize +2<CR>', { desc = 'Resize split right' })
+  -- Window resizing
+  { { 'n', 't' }, '<M-Up>', '<CMD>resize -2<CR>', { desc = 'Resize up' } },
+  { { 'n', 't' }, '<M-Down>', '<CMD>resize +2<CR>', { desc = 'Resize down' } },
+  { { 'n', 't' }, '<M-Left>', '<CMD>vertical resize -2<CR>', { desc = 'Resize left' } },
+  { { 'n', 't' }, '<M-Right>', '<CMD>vertical resize +2<CR>', { desc = 'Resize right' } },
 
--- buffer
-set('n', '<leader>x', '<CMD>Bdelete<CR>', { desc = 'delete current buffer' })
+  -- Buffers
+  { 'n', '<leader>x', '<CMD>Bdelete<CR>', { desc = 'Delete buffer' } },
 
--- Diagnostic
-set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-set('n', '<leader>q', vim.diagnostic.open_float, { desc = 'Show diagnostic [q]uickfix on cursor line' })
-set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+  -- Terminal navigation
+  { 't', '<C-h>', '<C-\\><C-n><C-w>h', { desc = 'Left window' } },
+  { 't', '<C-j>', '<C-\\><C-n><C-w>j', { desc = 'Below window' } },
+  { 't', '<C-k>', '<C-\\><C-n><C-w>k', { desc = 'Above window' } },
+  { 't', '<C-l>', '<C-\\><C-n><C-w>l', { desc = 'Right window' } },
+
+  -- Diagnostics
+  { 'n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' } },
+  { 'n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' } },
+  { 'n', '<leader>q', vim.diagnostic.open_float, { desc = 'Show diagnostics' } },
+  { 'n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Diagnostics list' } },
+
+  -- LSP
+  { 'n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' } },
+  { 'n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename symbol' } },
+  { 'n', '<leader>fm', vim.lsp.buf.format, { desc = 'Format buffer' } },
+
+  -- Plugins
+  { 'n', '<leader>e', '<CMD>Neotree toggle<CR>', { desc = 'Toggle file explorer' } },
+  { 'n', '<leader>tt', '<CMD>ToggleTerm<CR>', { desc = 'Toggle terminal' } },
+  { 'n', '<leader>ff', '<CMD>Telescope find_files<CR>', { desc = 'Find files' } },
+  { 'n', '<leader>fr', '<CMD>Telescope oldfiles<CR>', { desc = 'Recent files' } },
+}
+
+-- Apply keymaps with defaults
+for _, keymap in ipairs(keymaps) do
+  local mode, lhs, rhs, opts = unpack(keymap)
+  vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('force', defaults, opts or {}))
+end
 
 -- [[ Basic Autocommands ]]
 -- Highlight when yanking (copying) text
@@ -78,10 +129,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Open Alpha when there is no buffer and confirm to delete buffer when modified
 local function bdelete()
   if #vim.fn.getbufinfo { buflisted = 1 } > 1 then
-    cmd 'bprevious|bdelete!#'
+    vim.cmd 'bprevious|bdelete!#'
     return
   end
-  cmd 'Alpha|bdelete!#'
+  vim.cmd 'Alpha|bdelete!#'
 end
 
 vim.api.nvim_create_user_command('Bdelete', function()
@@ -99,9 +150,7 @@ vim.api.nvim_create_user_command('Bdelete', function()
   if choice == 3 then
     return
   elseif choice == 1 then
-    cmd 'silent write'
+    vim.cmd 'silent write'
   end
   bdelete()
 end, {})
-
--- vim: ts=2 sts=2 sw=2 et

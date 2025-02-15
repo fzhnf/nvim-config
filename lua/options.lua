@@ -74,5 +74,3 @@ vim.opt.laststatus = 0
 
 -- change sessionopts
 vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,winsize'
-
--- vim: ts=2 sts=2 sw=2 et

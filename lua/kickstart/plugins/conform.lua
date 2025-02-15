@@ -2,16 +2,16 @@ return {
   { -- Autoformat
     'stevearc/conform.nvim',
     event = 'BufWritePre',
-    keys = {
-      {
-        '<leader>lf',
-        function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
-    },
+    -- keys = {
+    --   {
+    --     '<leader>lf',
+    --     function()
+    --       require('conform').format { async = true, lsp_format = 'fallback' }
+    --     end,
+    --     mode = '',
+    --     desc = '[F]ormat buffer',
+    --   },
+    -- },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -26,31 +26,29 @@ return {
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 750,
           lsp_format = lsp_format_opt,
         }
       end,
       formatters_by_ft = {
-        c = { 'clang_format' },
-        cpp = { 'clang_format' },
         lua = { 'stylua' },
         python = {
           'ruff_fix',
           'ruff_format',
           'ruff_organize_imports',
         },
-        javascript = { 'biome' },
-        javascriptreact = { 'biome' },
-        typescript = { 'biome' },
-        typescriptreact = { 'biome' },
-        astro = { 'biome' },
-        html = { 'prettierd' },
-        css = { 'prettierd' },
-        json = { 'biome' },
+        php = { 'pint', 'php_cs_fixer' },
+        javascript = { 'biome-check' },
+        javascriptreact = { 'biome-check' },
+        typescript = { 'biome-check' },
+        typescriptreact = { 'biome-check' },
+        astro = { 'biome-check' },
+        html = { 'biome-check' },
+        css = { 'biome-check' },
+        json = { 'biome-check' },
         rust = { 'rustfmt' },
-        sql = { 'sqlfluff' },
+        go = { 'gofumpt', 'goimports-reviser', 'golines' },
       },
     },
   },
 }
--- vim: ts=2 sts=2 sw=2 et

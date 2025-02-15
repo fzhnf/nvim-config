@@ -5,7 +5,7 @@ return {
     opts = {
       options = {
         icons_enabled = vim.g.have_nerd_font,
-        component_separators = { left = '', right = '' },
+        component_separators = { left = '⟩', right = '⟨' },
         section_separators = { left = '', right = '' },
         always_divide_middle = false,
         refresh = {
@@ -39,5 +39,3 @@ return {
     },
   },
 }
-
--- vim: ts=2 sts=2 sw=2 et

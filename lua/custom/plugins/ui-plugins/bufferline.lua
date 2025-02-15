@@ -4,6 +4,7 @@ return {
   event = { 'BufRead', 'BufNewFile' },
 
   dependencies = {
+    'nvim-tree/nvim-web-devicons',
     'tiagovla/scope.nvim',
     opts = {},
   },

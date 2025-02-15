@@ -6,8 +6,8 @@ return {
   version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
+    'nvim-tree/nvim-web-devicons',
   },
   cmd = 'Neotree',
   keys = {
@@ -28,5 +28,3 @@ return {
     },
   },
 }
-
--- vim: ts=2 sts=2 sw=2 et

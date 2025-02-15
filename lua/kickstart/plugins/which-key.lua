@@ -1,7 +1,8 @@
 return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    keys = { '<leader>', '<c-w>', '"', "'", '`', 'c', 'v', 'g' },
+    cmd = 'WhichKey',
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.opt.timeoutlen
@@ -45,7 +46,7 @@ return {
 
       -- Document existing key chains
       spec = {
-                { '<leader>l', group = '[L]SP' },
+        { '<leader>l', group = '[L]SP' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>b', group = '[B]uffer' },
         { '<leader>lg', group = '[G]oto' },
@@ -56,9 +57,7 @@ return {
         },
 
         { '<leader>gt', group = '[T]oggle ' },
-
       },
     },
   },
 }
--- vim: ts=2 sts=2 sw=2 et
