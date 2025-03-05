@@ -183,6 +183,20 @@ return {
         tailwindcss = {},
         intelephense = {},
 
+        -- html (including: blade)
+        html = {
+          capabilities = vim.lsp.protocol.make_client_capabilities(),
+          filetypes = { 'html', 'blade' },
+          init_options = {
+            configurationSection = { 'html', 'css', 'javascript' },
+            embeddedLanguages = {
+              css = true,
+              javascript = true,
+            },
+            provideFormatter = true,
+          },
+        },
+
         -- go
         gopls = {
           settings = {
