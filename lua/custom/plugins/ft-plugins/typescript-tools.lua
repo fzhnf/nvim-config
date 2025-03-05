@@ -16,11 +16,7 @@ return {
     filetypes = filetypes,
     settings = {
       tsserver_plugins = {
-        {
-          name = '@vue/typescript-plugin',
-          location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
-          languages = { 'vue' },
-        },
+        '@vue/typescript-plugin',
       },
     },
   },

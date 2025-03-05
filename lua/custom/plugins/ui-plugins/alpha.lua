@@ -106,9 +106,6 @@ return {
         },
         layout = {
           {
-            -- current header takes up 38 lines max
-            -- dynamic padding based on that
-            -- i hope i will always have at least 4 sessions saved lol
             type = 'text',
             val = function()
               local pad = {}
@@ -154,3 +151,5 @@ return {
     end,
   },
 }
+
+-- vim: ts=2 sts=2 sw=2 et

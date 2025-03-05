@@ -8,7 +8,7 @@ return {
       autoload_mode = conf.AutoloadMode.CurrentDir,
       autosave_last_session = true,
       autosave_ignore_not_normal = true,
-      autosave_ignore_dirs = { '~/', '/', '~/Downloads' },
+      autosave_ignore_dirs = { os.getenv 'HOME', '/', os.getenv 'HOME' .. '/Downloads' },
       autosave_ignore_filetypes = {
         'gitcommit',
         'gitrebase',
