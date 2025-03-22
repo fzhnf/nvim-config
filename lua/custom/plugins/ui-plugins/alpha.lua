@@ -12,7 +12,7 @@ return {
         local sessions = utils.get_sessions()
         local temp_max_sessions = math.min(#sessions, max_sessions)
 
-        max_line_len = 0 -- Reset before calculation
+        max_line_len = math.min(max_line_len, 80) -- Cap at a reasonable maximum
 
         for i = 1, temp_max_sessions do
           local len = #sessions[i].dir:__tostring()
@@ -38,7 +38,7 @@ return {
               align_shortcut = 'left',
               position = 'center',
               hl = {
-                { 'DashboardFooter', 0, dirname_start + 1 + 3 },
+                { 'DashboardFooter', 1, dirname_start + 1 + 3 },
                 { 'DashboardCenter', dirname_start + 1 + 3, dirname_end },
               },
               hl_shortcut = 'DashboardKey',
@@ -51,7 +51,7 @@ return {
 
         table.insert(lines_specs, 1, {
           type = 'text',
-          val = string.format('%-' .. (max_line_len + 3 + 9) .. 's', '  Recent Sessions'),
+          val = '  Recent Sessions' .. string.rep(' ', max_line_len - 7),
           opts = { hl = { { 'DashboardEmphasized', 0, 20 } }, position = 'center' },
         })
 
@@ -93,7 +93,7 @@ return {
 
         table.insert(lines_specs, 1, {
           type = 'text',
-          val = string.format('%-' .. (max_line_len + 3 + 11) .. 's', '󰍜  Menu'),
+          val = '󰍜  Menu' .. string.rep(' ', max_line_len + 4),
           opts = { hl = { { 'DashboardEmphasized', 0, 20 } }, position = 'center' },
         })
 

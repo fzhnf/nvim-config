@@ -13,8 +13,9 @@ local keymaps = {
   { 'n', 'j', 'v:count ? "j" : "gj"', { expr = true } },
   { { 'n', 'v' }, 'K', '4k' },
   { { 'n', 'v' }, 'J', '4j' },
-  { -- Toggle line numbers
 
+  -- Toggle line numbers
+  {
     'n',
     '<leader>n',
     function()
@@ -30,16 +31,19 @@ local keymaps = {
     end,
     { desc = 'Toggle relative line numbers' },
   },
-  { -- Toggle word wrap
+
+  -- toggle wrap
+  {
     'n',
     '<leader>w',
     function()
       vim.wo.wrap = not vim.wo.wrap
     end,
-    { desc = 'Toggle word wrap' },
+    { desc = 'Toggle line wrap' },
   },
 
-  { -- Save file
+  -- Save file
+  {
     'n',
     '<C-s>',
     function()
@@ -136,33 +140,27 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 local function bdelete()
   if #vim.fn.getbufinfo { buflisted = 1 } > 1 then
     vim.cmd 'bprevious|bdelete!#'
-  else
-    vim.cmd 'Alpha|bdelete!#'
+    return
   end
+  vim.cmd 'Alpha|bdelete!#'
 end
 
 vim.api.nvim_create_user_command('Bdelete', function()
-  local buffers = vim.fn.getbufinfo { buflisted = 1 }
-
-  -- Prevent closing certain buffers
-  if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'alpha', 'mason', 'aerial' }, vim.bo.filetype) and #buffers > 1 then
-    vim.cmd 'bprevious'
+  -- Check if the file type is in excluded file types, if so, don't delete
+  if vim.tbl_contains({ 'neo-tree', 'toggleterm', 'lazy', 'mason', 'alpha', 'aerial' }, vim.bo.filetype) then
     return
   end
 
-  -- Skip confirmation if unmodified
   if not vim.bo.modified then
-    return bdelete()
+    bdelete()
+    return
   end
 
-  -- Confirm before deleting modified buffer
   local choice = vim.fn.confirm('Save changes to ' .. vim.fn.bufname(vim.fn.bufnr '%') .. ' ?', '&Yes\n&No\n&Cancel')
   if choice == 3 then
     return
-  end
-  if choice == 1 then
+  elseif choice == 1 then
     vim.cmd 'silent write'
   end
-
   bdelete()
 end, {})
