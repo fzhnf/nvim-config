@@ -12,7 +12,8 @@ return {
         icon = nil,
       },
       display = {
-        theme = 'onyx',
+        flavor = 'accent',
+        theme = 'catppuccin',
         swap_fields = false,
         swap_icons = false,
       },
@@ -22,8 +23,8 @@ return {
         reset_on_change = false,
       },
       idle = {
-        enabled = true,
-        timeout = 18000,
+        enabled = false,
+        timeout = 54000,
         show_status = true,
         ignore_focus = true,
         unidle_on_focus = true,

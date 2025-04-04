@@ -5,7 +5,6 @@ return {
     'nvim-lua/plenary.nvim',
     {
       'wa11breaker/flutter-bloc.nvim',
-      ft = 'dart',
       dependencies = {
         'nvimtools/none-ls.nvim', -- Required for code actions
         ft = 'dart',
@@ -13,7 +12,7 @@ return {
       opts = {
         bloc_type = 'default', -- Choose from: 'default', 'equatable', 'freezed'
         use_sealed_classes = true,
-        enable_code_actions = true,
+        enable_code_actions = false,
       },
     },
   },

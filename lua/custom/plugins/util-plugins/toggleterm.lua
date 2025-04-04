@@ -24,7 +24,7 @@ return {
       local function set_keymap(mode, key, action)
         vim.keymap.set(mode, key, function()
           action:toggle()
-        end)
+        end, { desc = '[L]azygit' })
       end
 
       set_keymap({ 't', 'n' }, '<M-[>', h)

@@ -37,7 +37,7 @@ return {
           'ruff_format',
           'ruff_organize_imports',
         },
-        php = { 'pint', 'php_cs_fixer' },
+        php = { 'pint' },
         javascript = { 'biome-check' },
         javascriptreact = { 'biome-check' },
         typescript = { 'biome-check' },
