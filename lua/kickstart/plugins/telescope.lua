@@ -4,6 +4,15 @@ return {
     dependencies = 'nvim-lua/plenary.nvim',
     opts = {
       defaults = {
+        -- vimgrep_arguments = {
+        --   'rg',
+        --   '--color=never',
+        --   '--no-heading',
+        --   '--with-filename',
+        --   '--line-number',
+        --   '--column',
+        --   '--smart-case',
+        -- },
         mappings = {
           i = {
             ['<c-enter>'] = 'to_fuzzy_refine',
@@ -47,27 +56,71 @@ return {
     -- -        builtin.find_files { cwd = vim.fn.stdpath 'config' }
     -- -      end, { desc = '[S]earch [N]eovim files' })
     keys = {
-      { '<leader>sh', '<CMD>Telescope help_tags<CR>', desc = '[S]earch [H]elp' },
-      { '<leader>sk', '<CMD>Telescope keymaps<CR>', desc = '[S]earch [K]eymaps' },
-      { '<leader>sf', '<CMD>Telescope find_files<CR>', desc = '[S]earch [F]iles' },
-      { '<leader>ss', '<CMD>Telescope builtin<CR>', desc = '[S]earch [S]elect Telescope' },
-      { '<leader>sw', '<CMD>Telescope grep_string<CR>', desc = '[S]earch current [W]ord' },
+      {
+        '<leader>sh',
+        '<CMD>Telescope help_tags<CR>',
+        desc = '[S]earch [H]elp',
+      },
+      {
+        '<leader>sk',
+        '<CMD>Telescope keymaps<CR>',
+        desc = '[S]earch [K]eymaps',
+      },
+      {
+        '<leader>sf',
+        '<CMD>Telescope find_files<CR>',
+        desc = '[S]earch [F]iles',
+      },
+      {
+        '<leader>ss',
+        '<CMD>Telescope builtin<CR>',
+        desc = '[S]earch [S]elect Telescope',
+      },
+      {
+        '<leader>sw',
+        '<CMD>Telescope grep_string<CR>',
+        desc = '[S]earch current [W]ord',
+      },
       {
         '<leader>sg',
-        '<CMD>lua require("telescope.builtin").live_grep { glob_pattern = "!node_modules/*" }<CR>',
+        '<CMD>lua require("telescope.builtin").live_grep { glob_pattern = { "!node_modules/*", "!vendor/*" } }<CR>',
         desc = '[S]earch by [G]rep',
       },
-      { '<leader>sd', '<CMD>Telescope diagnostics<CR>', desc = '[S]earch [D]iagnostics' },
+      {
+        '<leader>sG',
+        '<CMD>lua require("telescope.builtin").live_grep <CR>',
+        desc = '[S]earch by [G]rep',
+      },
+
+      {
+        '<leader>sd',
+        '<CMD>Telescope diagnostics<CR>',
+        desc = '[S]earch [D]iagnostics',
+      },
       { '<leader>sr', '<CMD>Telescope resume<CR>', desc = '[S]earch [R]esume' },
-      { '<leader>s.', '<CMD>Telescope oldfiles<CR>', desc = '[S]earch Recent Files ("." for repeat)' },
-      { '<leader><leader>', '<CMD>Telescope buffers<CR>', desc = '[ ] Find existing buffers' },
+      {
+        '<leader>s.',
+        '<CMD>Telescope oldfiles<CR>',
+        desc = '[S]earch Recent Files ("." for repeat)',
+      },
+      {
+        '<leader><leader>',
+        '<CMD>Telescope buffers<CR>',
+        desc = '[ ] Find existing buffers',
+      },
     },
   },
   {
     'jvgrootveld/telescope-zoxide',
-    keys = { { '<leader>sl', '<CMD>Telescope zoxide list<CR>', desc = '[S]earch [L]ist zoxide' } },
+    keys = {
+      {
+        '<leader>sl',
+        '<CMD>Telescope zoxide list<CR>',
+        desc = '[S]earch [L]ist zoxide',
+      },
+    },
     config = function()
-      require('telescope').load_extension 'zoxide'
+      require('telescope').load_extension('zoxide')
     end,
   },
 }

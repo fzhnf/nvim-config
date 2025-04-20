@@ -10,7 +10,7 @@ return {
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
         -- Remove the below condition to re-enable on windows.
-        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+        if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then
           return
         end
         return 'make install_jsregexp'
@@ -23,6 +23,9 @@ return {
           'rafamadriz/friendly-snippets',
           config = function()
             require('luasnip.loaders.from_vscode').lazy_load()
+            require('luasnip.loaders.from_vscode').lazy_load({
+              paths = { vim.fn.stdpath('config') .. '/snippets' },
+            })
           end,
         },
         {
@@ -46,11 +49,11 @@ return {
   },
   config = function()
     -- See `:help cmp`
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    luasnip.config.setup {}
+    local cmp = require('cmp')
+    local luasnip = require('luasnip')
+    luasnip.config.setup({})
 
-    cmp.setup {
+    cmp.setup({
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -62,7 +65,7 @@ return {
       -- chosen, you will need to read `:help ins-completion`
       --
       -- No, but seriously. Please read `:help ins-completion`, it is really good!
-      mapping = cmp.mapping.preset.insert {
+      mapping = cmp.mapping.preset.insert({
         -- Select the [n]ext item
         ['<C-n>'] = cmp.mapping.select_next_item(),
         -- Select the [p]revious item
@@ -81,7 +84,7 @@ return {
         -- you can uncomment the following lines
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.confirm { select = true }
+            cmp.confirm({ select = true })
           else
             fallback()
           end
@@ -132,7 +135,7 @@ return {
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-      },
+      }),
       sources = {
         {
           name = 'lazydev',
@@ -152,12 +155,12 @@ return {
           'menu',
         },
         expandable_indicator = true,
-        format = require('lspkind').cmp_format {
+        format = require('lspkind').cmp_format({
           mode = 'symbol_text',
           symbol_map = { Copilot = '' },
           -- before = require('tailwindcss-colorizer-cmp').formatter,
-        },
+        }),
       },
-    }
+    })
   end,
 }

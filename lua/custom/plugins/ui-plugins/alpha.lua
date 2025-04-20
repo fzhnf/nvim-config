@@ -1,6 +1,8 @@
 return {
   {
     'goolord/alpha-nvim',
+    lazy = false,
+    priority = 1001,
     config = function()
       local max_sessions = 4
       local session_shortcuts = 'asdfghjkl'

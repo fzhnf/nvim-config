@@ -19,10 +19,10 @@ return {
         text = {},
 
         python = { 'ruff', 'mypy' },
-
         json = {},
         typescript = {},
         javascript = {},
+        -- dart = { 'dcm' },
 
         -- php = { 'phpcs' },
       }
